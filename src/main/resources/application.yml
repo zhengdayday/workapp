@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  context-path: /
+
+helloWorld: spring Boot\u5927\u7237\u4F60\u597D
+
+msyql:
+   jdbcName: com.mysql.jdbc.Driver
+   dbUrl: jdbc:mysql://localhost:3306/zdd
+   userName: root
+   password: 2466040aa
+
+spring:
+   datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/zdd?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: 2466040aa
+   jpa:
+     hibernate.ddl-auto: update
+     show-sql: true
