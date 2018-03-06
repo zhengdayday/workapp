@@ -12,5 +12,12 @@ public interface UserService {
      */
 
     public User getUserByName(String userName);
+
+    /**
+     * save user
+     * @param user
+     * @return boolean
+     */
+    public boolean saveUser(User user);
 }
 

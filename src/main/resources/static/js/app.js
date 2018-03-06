@@ -9,11 +9,11 @@ zttApp.config(function($stateProvider, $urlRouterProvider) {
     // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/home',
-            templateUrl: '../partials/partial-home.html'
+            templateUrl: '../partials/main.html'
         })
-        .state('home.list',{
-            url:'/list',
-            templateUrl:'../partials/partial-home-list.html',
+        .state('home.login',{
+            url:'/login',
+            templateUrl:'../partials/login.html',
             controller: function ($scope,Restangular) {
                 $scope.userName = "zdd";
                 //基础路由
@@ -24,9 +24,20 @@ zttApp.config(function($stateProvider, $urlRouterProvider) {
             }
         })
         // nested list with just some random string data
-        .state('home.paragraph', {
-            url: '/paragraph',
-            template: 'I could sure use a drink right now.'
+        .state('home.register', {
+            url: '/register',
+            templateUrl: '../partials/register.html',
+            controller:function ($scope,Restangular) {
+                $scope.user = null;
+                $scope.regSucc = false;
+                $scope.register = function () {
+                    Restangular.one("users/save").customPOST($scope.user).then(function (value) {
+                        $scope.regSucc = value;
+                    },function (err) {
+                        console.warn(err);
+                    });
+                };
+            }
         })
         // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
         .state('about', {
@@ -34,7 +45,7 @@ zttApp.config(function($stateProvider, $urlRouterProvider) {
             views: {
 
                 // the main template will be placed here (relatively named)
-                '': { templateUrl: '../partials/partial-about.html' },
+                '': { templateUrl: '../partials/about.html' },
 
                 // the child views will be defined here (absolutely named)
                 'columnOne@about': { template: 'Look I am a column!' },
