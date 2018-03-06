@@ -9,11 +9,11 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
     // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/home',
-            templateUrl: 'js/partial-home.html'
+            templateUrl: '../partials/partial-home.html'
         })
         .state('home.list',{
             url:'/list',
-            templateUrl:'js/partial-home-list.html',
+            templateUrl:'../partials/partial-home-list.html',
             controller: function ($scope) {
                 $scope.dogs = ['sdf','sdfsdf','zcvcx'];
             }
@@ -29,14 +29,14 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             views: {
 
                 // the main template will be placed here (relatively named)
-                '': { templateUrl: 'js/partial-about.html' },
+                '': { templateUrl: '../partials/partial-about.html' },
 
                 // the child views will be defined here (absolutely named)
                 'columnOne@about': { template: 'Look I am a column!' },
 
                 // for column two, we'll define a separate controller
                 'columnTwo@about': {
-                    templateUrl: 'js/table-data.html',
+                    templateUrl: '../partials/table-data.html',
                     controller: 'scotchController'
                 }
             }
