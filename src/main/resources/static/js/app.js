@@ -1,4 +1,4 @@
-var routerApp = angular.module('routerApp', ['ui.router']);
+var routerApp = angular.module('routerApp', ["ui.router","restangular"]);
 
 routerApp.config(function($stateProvider, $urlRouterProvider) {
 
@@ -14,8 +14,13 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
         .state('home.list',{
             url:'/list',
             templateUrl:'../partials/partial-home-list.html',
-            controller: function ($scope) {
-                $scope.dogs = ['sdf','sdfsdf','zcvcx'];
+            controller: function ($scope,Restangular) {
+                $scope.userName = "zdd";
+                //基础路由
+                var user = Restangular.one("users","byname");
+                user.get({userName:$scope.userName}).then(function (resp) {
+                    $scope.users = resp;
+                });
             }
         })
         // nested list with just some random string data
