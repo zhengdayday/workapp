@@ -6,7 +6,6 @@ zttApp.config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
 
-    // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/home',
             templateUrl: '../partials/main.html'
@@ -16,14 +15,12 @@ zttApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl:'../partials/login.html',
             controller: function ($scope,Restangular) {
                 $scope.userName = "zdd";
-                //基础路由
                 var user = Restangular.one("users","byname");
                 user.get({userName:$scope.userName}).then(function (resp) {
                     $scope.users = resp;
                 });
             }
         })
-        // nested list with just some random string data
         .state('home.register', {
             url: '/register',
             templateUrl: '../partials/register.html',
@@ -39,18 +36,11 @@ zttApp.config(function($stateProvider, $urlRouterProvider) {
                 };
             }
         })
-        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
         .state('about', {
             url: '/about',
             views: {
-
-                // the main template will be placed here (relatively named)
                 '': { templateUrl: '../partials/about.html' },
-
-                // the child views will be defined here (absolutely named)
                 'columnOne@about': { template: 'Look I am a column!' },
-
-                // for column two, we'll define a separate controller
                 'columnTwo@about': {
                     templateUrl: '../partials/table-data.html',
                     controller: 'scotchController'
@@ -60,6 +50,7 @@ zttApp.config(function($stateProvider, $urlRouterProvider) {
         });
 
 });
+//test table
 zttApp.controller('scotchController', function($scope) {
 
     $scope.message = 'test';
