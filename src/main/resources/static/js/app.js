@@ -1,7 +1,7 @@
 var zttApp = angular.module('zttApp', ["ui.router","restangular"]);
 
 zttApp.config(function($stateProvider, $urlRouterProvider) {
-
+    //开始路由
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
