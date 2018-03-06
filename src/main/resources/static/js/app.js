@@ -1,6 +1,6 @@
-var routerApp = angular.module('routerApp', ["ui.router","restangular"]);
+var zttApp = angular.module('zttApp', ["ui.router","restangular"]);
 
-routerApp.config(function($stateProvider, $urlRouterProvider) {
+zttApp.config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
 
@@ -49,7 +49,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
         });
 
 });
-routerApp.controller('scotchController', function($scope) {
+zttApp.controller('scotchController', function($scope) {
 
     $scope.message = 'test';
 
