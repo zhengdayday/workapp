@@ -1,6 +1,6 @@
 var zttApp = angular.module('zttApp', ["ui.router","restangular"]);
 
-zttApp.config(function($stateProvider, $urlRouterProvider) {
+zttApp.config(function($stateProvider,$urlRouterProvider) {
     //开始路由
     $urlRouterProvider.otherwise('/home');
 
@@ -13,12 +13,16 @@ zttApp.config(function($stateProvider, $urlRouterProvider) {
         .state('home.login',{
             url:'/login',
             templateUrl:'../partials/login.html',
-            controller: function ($scope,Restangular) {
+            controller: function ($rootScope,$scope,$state,Restangular) {
                 $scope.user = null;
                 $scope.logSucc = false;
+                $("#login").removeAttr("ui-sref");
                 $scope.login = function () {
                     Restangular.one("users/login").customPOST($scope.user).then(function (value) {
                         $scope.logSucc = value;
+                        if($scope.logSucc == false) {
+                            $state.go('about');
+                        }
                     },function (err) {
                         console.warn(err);
                     })
@@ -28,12 +32,15 @@ zttApp.config(function($stateProvider, $urlRouterProvider) {
         .state('home.register', {
             url: '/register',
             templateUrl: '../partials/register.html',
-            controller:function ($scope,Restangular) {
+            controller:function ($scope,$state,Restangular) {
                 $scope.user = null;
                 $scope.regSucc = false;
                 $scope.register = function () {
                     Restangular.one("users/save").customPOST($scope.user).then(function (value) {
                         $scope.regSucc = value;
+                        if($scope.regSucc == false) {
+                            $state.go('home.login');
+                        }
                     },function (err) {
                         console.warn(err);
                     });
