@@ -14,6 +14,7 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserDao userDao;
 
+    @Transactional
     @Override
     public User getUserByName(String userName) {
         return userDao.findUser(userName);
@@ -25,6 +26,17 @@ public class UserServiceImpl implements UserService{
         User findUser = userDao.findUserByEmail(user.getEmail());
         if(findUser == null) {
             userDao.save(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Transactional
+    @Override
+    public boolean login(User user) {
+        User findUser = userDao.findUserByEmail(user.getEmail());
+        if(findUser != null && findUser.getPassword().equals(user.getPassword())) {
             return true;
         } else {
             return false;

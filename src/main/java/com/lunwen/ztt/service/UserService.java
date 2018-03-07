@@ -19,5 +19,12 @@ public interface UserService {
      * @return boolean
      */
     public boolean saveUser(User user);
+
+    /**
+     * login
+     * @param user
+     * @return boolean
+     */
+    public boolean login(User user);
 }
 

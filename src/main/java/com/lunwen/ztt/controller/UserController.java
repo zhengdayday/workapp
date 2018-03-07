@@ -37,4 +37,14 @@ public class UserController {
             return true;
         }
     }
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public boolean login(@RequestBody User user) {
+        if(userService.login(user)) {
+            return false;
+        } else {
+            //用户名或在密码错误
+            return true;
+        }
+    }
 }

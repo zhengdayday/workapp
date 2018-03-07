@@ -14,11 +14,15 @@ zttApp.config(function($stateProvider, $urlRouterProvider) {
             url:'/login',
             templateUrl:'../partials/login.html',
             controller: function ($scope,Restangular) {
-                $scope.userName = "zdd";
-                var user = Restangular.one("users","byname");
-                user.get({userName:$scope.userName}).then(function (resp) {
-                    $scope.users = resp;
-                });
+                $scope.user = null;
+                $scope.logSucc = false;
+                $scope.login = function () {
+                    Restangular.one("users/login").customPOST($scope.user).then(function (value) {
+                        $scope.logSucc = value;
+                    },function (err) {
+                        console.warn(err);
+                    })
+                };
             }
         })
         .state('home.register', {
