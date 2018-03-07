@@ -21,6 +21,7 @@ zttApp.config(function($stateProvider,$urlRouterProvider) {
                     Restangular.one("users/login").customPOST($scope.user).then(function (value) {
                         $scope.logSucc = value;
                         if($scope.logSucc == false) {
+                            //登录成功跳转页面
                             $state.go('about');
                         }
                     },function (err) {
@@ -39,6 +40,7 @@ zttApp.config(function($stateProvider,$urlRouterProvider) {
                     Restangular.one("users/save").customPOST($scope.user).then(function (value) {
                         $scope.regSucc = value;
                         if($scope.regSucc == false) {
+                            //注册成功跳转到登录页面
                             $state.go('home.login');
                         }
                     },function (err) {
