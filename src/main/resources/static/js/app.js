@@ -1,4 +1,4 @@
-var zttApp = angular.module('zttApp', ["ui.router","restangular"]);
+var zttApp = angular.module('zttApp', ["ui.router","restangular","ngCookies"]);
 
 zttApp.config(function($stateProvider,$urlRouterProvider) {
     //开始路由
@@ -13,7 +13,7 @@ zttApp.config(function($stateProvider,$urlRouterProvider) {
         .state('home.login',{
             url:'/login',
             templateUrl:'../partials/login.html',
-            controller: function ($rootScope,$scope,$state,Restangular) {
+            controller: function ($cookieStore,$rootScope,$scope,$state,Restangular) {
                 $scope.user = null;
                 $scope.logSucc = false;
                 $("#login").removeAttr("ui-sref");
@@ -33,7 +33,7 @@ zttApp.config(function($stateProvider,$urlRouterProvider) {
         .state('home.register', {
             url: '/register',
             templateUrl: '../partials/register.html',
-            controller:function ($scope,$state,Restangular) {
+            controller:function ($cookieStore,$scope,$state,Restangular) {
                 $scope.user = null;
                 $scope.regSucc = false;
                 $scope.register = function () {
