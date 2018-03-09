@@ -15,4 +15,6 @@ public class DefaultView extends WebMvcConfigurerAdapter{
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         super.addViewControllers(registry);
     }
+
+
 }
