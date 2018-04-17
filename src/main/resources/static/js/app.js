@@ -1,9 +1,11 @@
 var zttApp = angular.module('zttApp', ["ui.router","restangular","ngCookies"]);
 
-zttApp.config(function($stateProvider,$urlRouterProvider) {
+zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     //开始路由
     $urlRouterProvider.otherwise('/home');
-
+    //去除#！url
+    $locationProvider.hashPrefix('');
+    $locationProvider.html5Mode(true);
     $stateProvider
 
         .state('home', {
