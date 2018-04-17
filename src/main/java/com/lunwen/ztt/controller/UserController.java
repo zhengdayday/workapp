@@ -6,6 +6,9 @@ import com.lunwen.ztt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping(value = "/users")
@@ -40,10 +43,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String login(@RequestBody User user) throws Exception {
+    public Map<String, String> login(@RequestBody User user) {
+        Map<String, String> map = new HashMap<>();
+        String token = null;
         if(userService.login(user)) {
-           return JwtToken.createToken();
+            try {
+                token = JwtToken.createToken();
+                map.put("token", token);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            map.put("false", "false");
         }
-        return "false";
+        return map;
     }
 }

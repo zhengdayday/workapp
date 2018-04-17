@@ -21,10 +21,10 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                 $scope.logSucc = false;
                 $scope.login = function () {
                     Restangular.one("users/login").customPOST($scope.user).then(function (value) {
-                        console.log(value);
-                        if(value != null && value != "") {
+                        console.log(value.token);
+                        if(value.token != null && value.token != "") {
                             //登录成功跳转页面
-                            localStorage.setItem("token", value);
+                            localStorage.setItem("token", value.token);
                             $state.go('about');
                             $scope.logSucc = true;
                         } else {
@@ -62,7 +62,7 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                 'columnOne@about': {
                     template: 'Look I am a column!',
                     controller : function ($state) {
-                        if(!localStorage.hasOwnProperty('name')) {
+                        if(!localStorage.hasOwnProperty('token')) {
                             $state.go('home.login');
                         }
                     }
@@ -70,7 +70,7 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                 'columnTwo@about': {
                     templateUrl: '../partials/table-data.html',
                     controller : function ($state) {
-                        if(!localStorage.hasOwnProperty('name')) {
+                        if(!localStorage.hasOwnProperty('token')) {
                             $state.go('home.login');
                         }
                     }
