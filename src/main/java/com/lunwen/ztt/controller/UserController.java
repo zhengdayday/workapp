@@ -1,5 +1,6 @@
 package com.lunwen.ztt.controller;
 
+import com.lunwen.ztt.Utils.JwtToken;
 import com.lunwen.ztt.model.User;
 import com.lunwen.ztt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +40,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public boolean login(@RequestBody User user) {
+    public String login(@RequestBody User user) throws Exception {
         if(userService.login(user)) {
-            return false;
-        } else {
-            //用户名或在密码错误
-            return true;
+           return JwtToken.createToken();
         }
+        return "false";
     }
 }

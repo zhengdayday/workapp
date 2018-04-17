@@ -26,5 +26,6 @@ public interface UserService {
      * @return boolean
      */
     public boolean login(User user);
+
 }
 

@@ -11,6 +11,7 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         .state('home', {
             url: '/home',
             templateUrl: '../partials/main.html'
+
         })
         .state('home.login',{
             url:'/login',
@@ -18,16 +19,19 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: function ($cookieStore,$rootScope,$scope,$state,Restangular) {
                 $scope.user = null;
                 $scope.logSucc = false;
-                $("#login").removeAttr("ui-sref");
                 $scope.login = function () {
                     Restangular.one("users/login").customPOST($scope.user).then(function (value) {
-                        $scope.logSucc = value;
-                        if($scope.logSucc == false) {
+                        console.log(value);
+                        if(value != null && value != "") {
                             //登录成功跳转页面
+                            localStorage.setItem("token", value);
                             $state.go('about');
+                            $scope.logSucc = true;
+                        } else {
+                            $scope.logSucc = false;
                         }
                     },function (err) {
-                        console.warn(err);
+                        console.log(err);
                     })
                 };
             }
@@ -46,7 +50,7 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                             $state.go('home.login');
                         }
                     },function (err) {
-                        console.warn(err);
+                        console.log(err);
                     });
                 };
             }
@@ -55,10 +59,21 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url: '/about',
             views: {
                 '': { templateUrl: '../partials/about.html' },
-                'columnOne@about': { template: 'Look I am a column!' },
+                'columnOne@about': {
+                    template: 'Look I am a column!',
+                    controller : function ($state) {
+                        if(!localStorage.hasOwnProperty('name')) {
+                            $state.go('home.login');
+                        }
+                    }
+                },
                 'columnTwo@about': {
                     templateUrl: '../partials/table-data.html',
-                    controller: 'scotchController'
+                    controller : function ($state) {
+                        if(!localStorage.hasOwnProperty('name')) {
+                            $state.go('home.login');
+                        }
+                    }
                 }
             }
 
