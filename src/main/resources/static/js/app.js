@@ -4,8 +4,8 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     //开始路由
     $urlRouterProvider.otherwise('/home');
     //去除#！url
-    $locationProvider.hashPrefix('');
-    $locationProvider.html5Mode(true);
+   // $locationProvider.hashPrefix('');
+    //$locationProvider.html5Mode(true);
     $stateProvider
 
         .state('home', {
