@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>work</title>
     <link rel="stylesheet" href="ref/bootstrap.min.css">
     <script src="ref/jquery.min.js"></script>
@@ -21,14 +22,15 @@
 
 <body ng-app="zttApp">
 
-<nav class="navbar navbar-inverse" role="navigation">
+<nav class="navbar navbar-inverse" role="navigation" ng-controller="zttAppController">
     <div class="navbar-header">
-        <a class="navbar-brand" ui-sref="home">Work</a>
+        <a class="navbar-brand" ui-sref="home">作业系统</a>
     </div>
-    <ul class="nav navbar-nav">
-        <li><a ui-sref="home">Home</a></li>
-        <li><a ui-sref="about">About</a></li>
+    <ul class="nav navbar-nav" ng-show="isLogin">
+        <li><a ui-sref="home">课程信息</a></li>
+        <li><a ui-sref="about">个人中心</a></li>
     </ul>
+    {{isLogin}}
 </nav>
 
 <div class="container">
