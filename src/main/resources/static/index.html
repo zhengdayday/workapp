@@ -16,15 +16,16 @@
     <script src="js/app.js"></script>
     <script src="ref/lodash.min.js"></script>
     <script src="ref/restangular.min.js"></script>
+    <base href="/">
 </head>
 
 <body ng-app="zttApp">
-<nav class="navbar navbar-inverse" role="navigation" ng-controller="zttAppController">
+
+<nav class="navbar navbar-inverse" role="navigation">
     <div class="navbar-header">
         <a class="navbar-brand" ui-sref="home">Work</a>
     </div>
-    {{isLogin}}
-    <ul class="nav navbar-nav" ng-show="isLogin">
+    <ul class="nav navbar-nav">
         <li><a ui-sref="home">Home</a></li>
         <li><a ui-sref="about">About</a></li>
     </ul>
@@ -33,5 +34,6 @@
 <div class="container">
     <div ui-view></div>
 </div>
+
 </body>
 </html>
