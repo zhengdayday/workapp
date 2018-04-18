@@ -1,9 +1,13 @@
 package com.lunwen.ztt.controller;
 
+import com.lunwen.ztt.Utils.JwtToken;
 import com.lunwen.ztt.model.User;
 import com.lunwen.ztt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -39,12 +43,20 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public boolean login(@RequestBody User user) {
-        if(userService.login(user)) {
-            return false;
-        } else {
-            //用户名或在密码错误
-            return true;
+    public Map<String, Object> login(@RequestBody User user) {
+        User finUser = userService.login(user);
+        Map<String, Object> map = new HashMap<>();
+        if(finUser != null) {
+            try {
+
+                String token = JwtToken.createToken();
+                map.put("token", token);
+                map.put("name", finUser.getName());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+        return map;
     }
 }

@@ -1,5 +1,15 @@
 var zttApp = angular.module('zttApp', ["ui.router","restangular","ngCookies"]);
 
+zttApp.controller('zttAppController', function ($scope) {
+    $scope.isLogin = false;
+    $scope.loginName = "";
+    //localStorage.removeItem("token");
+    //localStorage.removeItem("name");
+    if(localStorage.hasOwnProperty("token")) {
+        $scope.isLogin = true;
+        $scope.loginName = localStorage.getItem("name");
+    }
+})
 zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     //开始路由
     $urlRouterProvider.otherwise('/home');
@@ -10,7 +20,15 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
         .state('home', {
             url: '/home',
-            templateUrl: '../partials/main.html'
+            templateUrl: '../partials/main.html' ,
+            controller :function ($scope) {
+                $scope.isLogin = false;
+                $scope.loginName = "";
+                if(localStorage.hasOwnProperty("token")) {
+                    $scope.isLogin = true;
+                    $scope.loginName = localStorage.getItem("name");
+                }
+            }
         })
         .state('home.login',{
             url:'/login',
@@ -18,13 +36,18 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: function ($cookieStore,$rootScope,$scope,$state,Restangular) {
                 $scope.user = null;
                 $scope.logSucc = false;
-                $("#login").removeAttr("ui-sref");
                 $scope.login = function () {
                     Restangular.one("users/login").customPOST($scope.user).then(function (value) {
-                        $scope.logSucc = value;
-                        if($scope.logSucc == false) {
-                            //登录成功跳转页面
-                            $state.go('about');
+                        if(value.token != null && value.token.trim() != "") {
+                            localStorage.setItem("token", value.token);
+                            localStorage.setItem("name", value.name);
+                            $scope.isLogin = true;
+                            $scope.loginName = localStorage.getItem("name");
+                            //$state.reload();
+                            location.reload();
+                            $scope.logSucc = true;
+                        } else {
+                            $scope.logSucc = false;
                         }
                     },function (err) {
                         console.warn(err);
@@ -86,3 +109,10 @@ zttApp.controller('scotchController', function($scope) {
     ];
 
 });
+
+zttApp.run(['$rootScope', '$window', '$location', '$log','$templateCache', function ($rootScope, $window, $location, $log,$templateCache) {
+    var stateChangeSuccess = $rootScope.$on('$stateChangeSuccess', stateChangeSuccess);
+    function stateChangeSuccess($rootScope) {
+        $templateCache.removeAll();
+    }
+}]);

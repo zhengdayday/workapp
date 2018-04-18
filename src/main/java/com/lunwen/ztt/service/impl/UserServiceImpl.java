@@ -34,12 +34,12 @@ public class UserServiceImpl implements UserService{
 
     @Transactional
     @Override
-    public boolean login(User user) {
+    public User login(User user) {
         User findUser = userDao.findUserByEmail(user.getEmail());
         if(findUser != null && findUser.getPassword().equals(user.getPassword())) {
-            return true;
+            return findUser;
         } else {
-            return false;
+            return null;
         }
     }
 }

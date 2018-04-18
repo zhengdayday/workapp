@@ -7,7 +7,7 @@ public interface UserService {
 
     /**
      * get user
-     * @param userName
+     * @param userName name
      * @return
      */
 
@@ -15,16 +15,16 @@ public interface UserService {
 
     /**
      * save user
-     * @param user
+     * @param user uer
      * @return boolean
      */
     public boolean saveUser(User user);
 
     /**
      * login
-     * @param user
-     * @return boolean
+     * @param user user
+     * @return user
      */
-    public boolean login(User user);
+    public User login(User user);
 }
 
