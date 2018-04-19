@@ -11,6 +11,26 @@
     <style>
         .navbar { border-radius:0; }
     </style>
+    <style>
+        #pMain {
+            width: 500px;
+            margin: 0 auto;
+            margin-top: 100px;
+        }
+        nav {
+            position: relative;
+            width:100%;
+            height: 50px;
+        }
+        .pagination {
+            right: 0px;
+            position: absolute;
+            top: -30px;
+        }
+        nav li {
+            cursor: pointer;
+        }
+    </style>
     <script src="ref/angular.min.js"></script>
     <script src="ref/angular.cookies.js"></script>
     <script src="ref/angular-ui-router.js"></script>
@@ -28,7 +48,7 @@
     </div>
     <ul class="nav navbar-nav" ng-show="isLogin">
         <li><a ui-sref="home">课程信息</a></li>
-        <li><a ui-sref="about">个人中心</a></li>
+        <li><a ui-sref="userInfo">个人中心</a></li>
     </ul>
 </nav>
 

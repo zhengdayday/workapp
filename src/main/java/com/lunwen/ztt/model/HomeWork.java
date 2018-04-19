@@ -19,14 +19,18 @@ public class HomeWork {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long wno;
 
+    /** 课程号 */
+    @Column(name = "lno")
+    private Long lno;
 
-    /** 课程名 */
+    /** 作业描述 */
     @Column(name = "work_desc")
     private String desc;
 
-    /** 工号 */
+    /** 教师工号 */
     @Column(name = "tno")
     private String tno;
+
 
     public Long getWno() {
         return wno;
@@ -34,6 +38,14 @@ public class HomeWork {
 
     public void setWno(Long wno) {
         this.wno = wno;
+    }
+
+    public Long getLno() {
+        return lno;
+    }
+
+    public void setLno(Long lno) {
+        this.lno = lno;
     }
 
     public String getDesc() {

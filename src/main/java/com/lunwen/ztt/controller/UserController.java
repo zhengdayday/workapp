@@ -28,7 +28,18 @@ public class UserController {
     }
 
     /**
-     * 注册
+     * get all user
+     * @return
+     */
+    @RequestMapping(value = "/allUser", method = RequestMethod.GET)
+    public Map<String, Object> getAllUser() {
+        Map<String, Object> map =  new HashMap<>();
+        map.put("userlist", userService.getAllUser());
+        return map;
+    }
+
+    /**
+     * 学生注册
      * @param user
      * @return boolean
      */
@@ -48,7 +59,6 @@ public class UserController {
         Map<String, Object> map = new HashMap<>();
         if(finUser != null) {
             try {
-
                 String token = JwtToken.createToken();
                 map.put("token", token);
                 map.put("name", finUser.getName());

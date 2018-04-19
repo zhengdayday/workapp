@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -23,13 +25,15 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public boolean saveUser(User user) {
-        User findUser = userDao.findUserByEmail(user.getEmail());
-        if(findUser == null) {
+        User findUserByEmail = userDao.findUserByEmail(user.getEmail());
+        User findUserByNumber = userDao.findUserByNumber(user.getNumber());
+        if(findUserByEmail == null || findUserByNumber == null) {
+            // 只能学生注册
+            user.setLevel(0);
             userDao.save(user);
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     @Transactional
@@ -41,5 +45,10 @@ public class UserServiceImpl implements UserService{
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<User> getAllUser() {
+        return userDao.findAll();
     }
 }

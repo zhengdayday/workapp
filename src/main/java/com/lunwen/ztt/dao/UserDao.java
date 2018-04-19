@@ -12,4 +12,7 @@ public interface UserDao extends JpaRepository<User, Long>{
 
     @Query("from User u where u.email=:email")
     User findUserByEmail(@Param("email") String email);
+
+    @Query("from User u where u.number=:number")
+    User findUserByNumber(@Param("number") String number);
 }

@@ -2,7 +2,7 @@ package com.lunwen.ztt.model;
 
 import javax.persistence.*;
 
-/**
+/** 学生选课表
  * Created with IDEA
  * author: daydayofzheng
  * Date: 18-4-18

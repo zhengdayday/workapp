@@ -33,13 +33,8 @@ public class StudentWork {
     @Column(name = "answer")
     private String answer;
 
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
+    @Column(name = "work_status")
+    private String work_status;
 
     public String getSno() {
         return sno;
@@ -64,4 +59,24 @@ public class StudentWork {
     public void setGrade(Long grade) {
         this.grade = grade;
     }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public String getWork_status() {
+        return work_status;
+    }
+
+    public void setWork_status(String work_status) {
+        this.work_status = work_status;
+    }
+
+    /**
+     * 老师新建课程 -> 在该课程下新建作业 -> 作业智能推送订阅了该课程的学生
+     */
 }

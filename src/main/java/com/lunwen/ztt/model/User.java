@@ -3,29 +3,32 @@ package com.lunwen.ztt.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tbl_user")
+@Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /** 姓名 */
     @Column(name = "name")
     private String name;
 
+    /** 密码 */
     @Column(name = "password")
     private String password;
 
-    @Column(name = "emailz")
+    /** email */
+    @Column(name = "email")
     private String email;
 
-    public Integer getId() {
-        return id;
-    }
+    /** level 用于判断学生0 教师1 管理员2*/
+    @Column(name = "level")
+    private int level;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    /** 学号 工号 */
+    @Column(name = "number", unique = true)
+    private String number;
 
     public String getName() {
         return name;
@@ -49,5 +52,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 }
