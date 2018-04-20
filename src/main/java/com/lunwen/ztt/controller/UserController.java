@@ -60,8 +60,11 @@ public class UserController {
         if(finUser != null) {
             try {
                 String token = JwtToken.createToken();
+                // 登录成功后传给前端token, name , level
                 map.put("token", token);
                 map.put("name", finUser.getName());
+                map.put("level", finUser.getLevel());
+                map.put("number", finUser.getNumber());
 
             } catch (Exception e) {
                 e.printStackTrace();

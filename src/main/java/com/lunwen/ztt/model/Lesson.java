@@ -27,6 +27,10 @@ public class Lesson {
     @Column(name = "tno")
     private String tno;
 
+    /** 课程详情*/
+    @Column(name = "lesson_desc")
+    private String desc;
+
     public Long getLno() {
         return lno;
     }
@@ -49,5 +53,13 @@ public class Lesson {
 
     public void setTno(String tno) {
         this.tno = tno;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

@@ -1,6 +1,7 @@
 package com.lunwen.ztt.service;
 
 import com.lunwen.ztt.model.Lesson;
+import com.lunwen.ztt.view.LessonView;
 
 import java.util.List;
 
@@ -15,24 +16,29 @@ public interface LessonService {
 
     /**
      * 获得所有的课程
-     * @return
+     * @return list
      */
     public List<Lesson> getAllLesson();
 
     /**
      * 保存课程
-     * @param lessonName 课程名
-     * @param tno 老师工号
-     * @return
+     * @param lesson 课程
+     * @return boolean
      */
-    public boolean saveLesson(String lessonName, String tno);
+    public boolean saveLesson(Lesson lesson);
 
     /**
      * 删除课程
-     * @param lesson
-     * @return
+     * @param lesson 课程
+     * @return boolean
      */
     public boolean deleteLesson(Lesson lesson);
 
+    /**
+     * 查找教师的所有课程
+     * @param tno 教师工号
+     * @return list
+     */
+    public List<LessonView> getTeacherLesson(String tno);
 
 }

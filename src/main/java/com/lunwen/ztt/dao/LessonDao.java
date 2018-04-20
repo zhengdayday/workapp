@@ -4,6 +4,8 @@ import com.lunwen.ztt.model.Lesson;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 /**
  * Created with IDEA
  * author: daydayofzheng
@@ -18,6 +20,12 @@ public interface LessonDao extends JpaRepository<Lesson, Long>{
      * @param tno 教师工号
      * @return
      */
-    @Query("from Lesson l where l.lessonName=:lessonName and l.tno:=tno")
     Lesson findLessonByLessonNameAndTno(String lessonName, String tno);
+
+    /**
+     * 通过工号查找课程
+     * @param tno
+     * @return
+     */
+    List<Lesson> findLessonByTno(String tno);
 }

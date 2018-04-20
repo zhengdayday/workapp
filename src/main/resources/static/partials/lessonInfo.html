@@ -1,0 +1,138 @@
+
+<!-- 添加课程模态框-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <a id="modal-969875"  href="javascript:; #modal-container-969875" role="button" class="btn btn-success"  style="margin-bottom: 20px" data-toggle="modal">添加课程</a>
+
+            <div class="modal fade" id="modal-container-969875" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #222">
+                            <h5 class="modal-title" id="myModalLabel" style="color:#fff">
+                                添加课程
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true" style="color:#fff">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" ng-show="!isLogin">
+                                <div class="col-md-12">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <label for="InputName">
+                                                课程名
+                                            </label>
+                                            <input type="text" class="form-control" id="InputName" ng-model="lesson.lessonName"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="InputDesc">
+                                                课程描述
+                                            </label>
+                                            <input type="text" class="form-control" id="InputDesc" ng-model="lesson.desc"/>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" ng-click="saveLesson()" ng-disabled="lesson.lessonName == null || lesson.desc == null" data-dismiss="modal">
+                                保存
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                关闭
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="tabbable" id="tabs-390357">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="javascript:; #panel-16186" data-toggle="tab">我的课程</a>
+                    </li>
+                    <li>
+                        <a href="javascript:; #panel-735528" data-toggle="tab">所有课程</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="panel-16186">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>课程名</th>
+                                <th>教师名</th>
+                                <th>操作</th>
+                            </tr>
+                            <tr ng-repeat="x in items">
+                                <!-- <td>{{ $index + 1 }}</td> -->
+                                <td ng-bind="x.lessonName"></td>
+                                <td ng-bind="x.teacherName"></td>
+                                <td><a>查看课程的作业</a></td>
+                            </tr>
+                        </table>
+                        <nav>
+                            <ul class="pagination">
+                                <li>
+                                    <a ng-click="Previous()">
+                                        <span>上一页</span>
+                                    </a>
+                                </li>
+                                <li ng-repeat="page in pageList" ng-class="{active: isActivePage(page)}" >
+                                    <a ng-click="selectPage(page)" >{{ page }}</a>
+                                </li>
+                                <li>
+                                    <a ng-click="Next()">
+                                        <span>下一页</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="tab-pane" id="panel-735528">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>课程名</th>
+                                <th>教师名</th>
+                                <th>操作</th>
+                            </tr>
+                            <tr ng-repeat="x in items">
+                                <!-- <td>{{ $index + 1 }}</td> -->
+                                <td ng-bind="x.lessonName"></td>
+                                <td ng-bind="x.teacherName"></td>
+                                <td><a>查看课程的作业</a></td>
+                            </tr>
+                        </table>
+                        <nav>
+                            <ul class="pagination">
+                                <li>
+                                    <a ng-click="Previous()">
+                                        <span>上一页</span>
+                                    </a>
+                                </li>
+                                <li ng-repeat="page in pageList" ng-class="{active: isActivePage(page)}" >
+                                    <a ng-click="selectPage(page)" >{{ page }}</a>
+                                </li>
+                                <li>
+                                    <a ng-click="Next()">
+                                        <span>下一页</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

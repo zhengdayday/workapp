@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService{
         User findUserByNumber = userDao.findUserByNumber(user.getNumber());
         if(findUserByEmail == null || findUserByNumber == null) {
             // 只能学生注册
-            user.setLevel(0);
+            user.setLevel(1);
             userDao.save(user);
             return true;
         }

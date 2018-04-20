@@ -1,12 +1,16 @@
 package com.lunwen.ztt.service.impl;
 
 import com.lunwen.ztt.dao.LessonDao;
+import com.lunwen.ztt.dao.UserDao;
 import com.lunwen.ztt.model.Lesson;
+import com.lunwen.ztt.model.User;
 import com.lunwen.ztt.service.LessonService;
+import com.lunwen.ztt.view.LessonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +27,11 @@ public class LessonServiceImpl implements LessonService {
     @Autowired
     private LessonDao lessonDao;
 
+    /** 用户数据访问对象 */
+    @Autowired
+    private UserDao userDao;
+
+
     @Override
     @Transactional
     public List<Lesson> getAllLesson() {
@@ -31,12 +40,9 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     @Transactional
-    public boolean saveLesson(String lessonName, String tno) {
-        Lesson findLesson = lessonDao.findLessonByLessonNameAndTno(lessonName, tno);
-        if(findLesson != null) {
-            Lesson lesson = new Lesson();
-            lesson.setLessonName(lessonName);
-            lesson.setTno(tno);
+    public boolean saveLesson(Lesson lesson) {
+        Lesson findLesson = lessonDao.findLessonByLessonNameAndTno(lesson.getLessonName(), lesson.getTno());
+        if(findLesson == null) {
             lessonDao.save(lesson);
             return true;
         }
@@ -49,5 +55,19 @@ public class LessonServiceImpl implements LessonService {
     public boolean deleteLesson(Lesson lesson) {
         lessonDao.delete(lesson);
         return true;
+    }
+
+    @Override
+    @Transactional
+    public List<LessonView> getTeacherLesson(String tno) {
+        //查找教师的所有课程
+        List<Lesson> list = lessonDao.findLessonByTno(tno);
+        List<LessonView> viewList = new ArrayList<>();
+        User user = userDao.findUserByNumber(tno);
+        for (Lesson lesson : list) {
+            LessonView view = new LessonView(lesson.getLessonName(), lesson.getLno(), user.getName());
+            viewList.add(view);
+        }
+        return viewList;
     }
 }
