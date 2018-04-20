@@ -8,12 +8,28 @@ package com.lunwen.ztt.view;
  */
 public class LessonView {
 
+    private Long lno;
+
     private String lessonName;
 
     private Long lessonNumber;
 
     private String teacherName;
 
+    public LessonView(Long lno, String lessonName, Long lessonNumber, String teacherName) {
+        this.lno = lno;
+        this.lessonName = lessonName;
+        this.lessonNumber = lessonNumber;
+        this.teacherName = teacherName;
+    }
+
+    public Long getLno() {
+        return lno;
+    }
+
+    public void setLno(Long lno) {
+        this.lno = lno;
+    }
 
     public String getLessonName() {
         return lessonName;
@@ -36,12 +52,6 @@ public class LessonView {
     }
 
     public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
-    }
-
-    public LessonView(String lessonName, Long lessonNumber, String teacherName) {
-        this.lessonName = lessonName;
-        this.lessonNumber = lessonNumber;
         this.teacherName = teacherName;
     }
 

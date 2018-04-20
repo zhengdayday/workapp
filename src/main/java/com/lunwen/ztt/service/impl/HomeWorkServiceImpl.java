@@ -23,15 +23,19 @@ public class HomeWorkServiceImpl implements HomeWorkService{
     private HomeWorkDao homeWorkDao;
 
     @Override
-    public List<HomeWork> getAllHomeWork() {
-        return homeWorkDao.findAll();
+    public List<HomeWork> getAllHomeWork(String tno) {
+        return homeWorkDao.findHomeWorkByTno(tno);
     }
 
     @Override
     @Transactional
     public boolean saveHomeWork(HomeWork homeWork) {
-        homeWorkDao.save(homeWork);
-        return true;
+        HomeWork findWork = homeWorkDao.findHomeWorkByTnoAndWorkName(homeWork.getTno(), homeWork.getWorkName());
+        if(findWork == null) {
+            homeWorkDao.save(homeWork);
+            return true;
+        }
+        return false;
     }
 
     @Override

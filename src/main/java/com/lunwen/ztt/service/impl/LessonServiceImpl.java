@@ -65,7 +65,7 @@ public class LessonServiceImpl implements LessonService {
         List<LessonView> viewList = new ArrayList<>();
         User user = userDao.findUserByNumber(tno);
         for (Lesson lesson : list) {
-            LessonView view = new LessonView(lesson.getLessonName(), lesson.getLno(), user.getName());
+            LessonView view = new LessonView(lesson.getLno(), lesson.getLessonName(), lesson.getLno(), user.getName());
             viewList.add(view);
         }
         return viewList;

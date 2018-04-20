@@ -31,6 +31,8 @@ public class HomeWork {
     @Column(name = "tno")
     private String tno;
 
+    @Column(name = "work_name")
+    private String workName;
 
     public Long getWno() {
         return wno;
@@ -62,5 +64,13 @@ public class HomeWork {
 
     public void setTno(String tno) {
         this.tno = tno;
+    }
+
+    public String getWorkName() {
+        return workName;
+    }
+
+    public void setWorkName(String workName) {
+        this.workName = workName;
     }
 }

@@ -16,9 +16,10 @@ public interface HomeWorkService {
 
     /**
      * 获得所有work
+     * @param tno 工号
      * @return list home work
      */
-    public List<HomeWork> getAllHomeWork();
+    public List<HomeWork> getAllHomeWork(String tno);
 
     /**
      * 新建作业
