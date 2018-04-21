@@ -1,4 +1,4 @@
-var zttApp = angular.module('zttApp', ["ui.router","restangular","ngCookies"]);
+var zttApp = angular.module('zttApp', ["ui.router","restangular","ngCookies", "textAngular"]);
 
 zttApp.controller('zttAppController', function ($scope) {
    $scope.isLogin = false;

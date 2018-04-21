@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 /** 课程表
  * Created with IDEA
- * author: daydayofzheng
+ * author: wangjie
  * Date: 18-4-18
  * Time: 下午4:50
  */

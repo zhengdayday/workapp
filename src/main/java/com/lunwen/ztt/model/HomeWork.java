@@ -5,7 +5,7 @@ import javax.persistence.*;
 /**
  * 作业表
  * Created with IDEA
- * author: daydayofzheng
+ * author: wangjie
  * Date: 18-4-18
  * Time: 下午6:09
  */
@@ -26,6 +26,10 @@ public class HomeWork {
     /** 作业描述 */
     @Column(name = "work_desc")
     private String desc;
+
+    /** 作业问题 */
+    @Column(name ="work_info")
+    private String workInfo;
 
     /** 教师工号 */
     @Column(name = "tno")
@@ -56,6 +60,14 @@ public class HomeWork {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getWorkInfo() {
+        return workInfo;
+    }
+
+    public void setWorkInfo(String workInfo) {
+        this.workInfo = workInfo;
     }
 
     public String getTno() {

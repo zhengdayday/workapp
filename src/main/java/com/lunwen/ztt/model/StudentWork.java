@@ -5,7 +5,7 @@ import javax.persistence.*;
 /**
  * 学生作业表
  * Created with IDEA
- * author: daydayofzheng
+ * author: wangjie
  * Date: 18-4-18
  * Time: 下午4:52
  */
@@ -35,6 +35,10 @@ public class StudentWork {
 
     @Column(name = "work_status")
     private String work_status;
+
+    /** 老师是否批改作业 */
+    @Column(name = "work_read")
+    private String workRead;
 
     public String getSno() {
         return sno;
@@ -76,7 +80,15 @@ public class StudentWork {
         this.work_status = work_status;
     }
 
-    /**
+    public String getWorkRead() {
+        return workRead;
+    }
+
+    public void setWorkRead(String workRead) {
+        this.workRead = workRead;
+    }
+
+/**
      * 老师新建课程 -> 在该课程下新建作业 -> 作业智能推送订阅了该课程的学生
      */
 }

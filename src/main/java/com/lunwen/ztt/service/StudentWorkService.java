@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 学生作业情况service
  * Created with IDEA
- * author: daydayofzheng
+ * author: wangjie
  * Date: 18-4-19
  * Time: 下午7:37
  */
