@@ -39,8 +39,23 @@ public class HomeWorkController {
         return map;
     }
 
+    /**
+     * 新建作业
+     * @param homeWork 作业
+     * @return boolean
+     */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public boolean saveHomeWork(@RequestBody HomeWork homeWork) {
         return homeWorkService.saveHomeWork(homeWork);
+    }
+
+    /**
+     * 通过作业号查找作业
+     * @param wno 作业号
+     * @return HomeWork
+     */
+    @RequestMapping(value = "/getWorkInfo", method = RequestMethod.GET)
+    public HomeWork getHomeWorkInfo(Long wno) {
+        return homeWorkService.getHomeWork(wno);
     }
 }

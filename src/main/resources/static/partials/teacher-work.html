@@ -81,7 +81,7 @@
                                 <!-- <td>{{ $index + 1 }}</td> -->
                                 <td ng-bind="x.workName"></td>
                                 <td ng-bind="x.desc"></td>
-                                <td><a>查看作业详情</a></td>
+                                <td><a ui-sref="work({wno:{{x.wno}}})" >查看作业详情</a></td>
                             </tr>
                         </table>
                         <nav>
@@ -102,7 +102,9 @@
                             </ul>
                         </nav>
                     </div>
-            </div>
+                </div>
+          </div>
         </div>
     </div>
 </div>
+<div ui-view></div>

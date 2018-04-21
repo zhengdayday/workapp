@@ -1,0 +1,100 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="tabbable" id="tabs-390357">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="javascript:; #panel-16186" data-toggle="tab">当前作业信息</a>
+                    </li>
+                    <li>
+                        <a href="javascript:; #panel-735528" data-toggle="tab">已批改作业</a>
+                    </li>
+
+                    <li>
+                        <a href="javascript:; #panel-18342" data-toggle="tab">未批改作业</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <!-- 作业描述 -->
+                    <div class="tab-pane active" id="panel-16186">
+                        <div ng-bind-html="workInfo.workInfo | parseHTML"></div>
+                    </div>
+
+                    <!-- 已批改作业 -->
+                    <div class="tab-pane" id="panel-735528">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>作业名字</th>
+                                <th>作业描述</th>
+                                <th>学生名</th>
+                                <th>评价</th>
+                            </tr>
+                            <tr ng-repeat="x in readitems">
+                                <!-- <td>{{ $index + 1 }}</td> -->
+                                <td ng-bind="x.workName"></td>
+                                <td ng-bind="x.workDesc"></td>
+                                <td ng-bind="x.studentName"></td>
+                                <td ng-bind="x.gradle"></td>
+                            </tr>
+                        </table>
+                        <nav>
+                            <ul class="pagination">
+                                <li>
+                                    <a ng-click="readPrevious()">
+                                        <span>上一页</span>
+                                    </a>
+                                </li>
+                                <li ng-repeat="page in pageList" ng-class="{active: readisActivePage(page)}" >
+                                    <a ng-click="readselectPage(page)" >{{ page }}</a>
+                                </li>
+                                <li>
+                                    <a ng-click="readNext()">
+                                        <span>下一页</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <!-- 未批改作业 -->
+                    <div class="tab-pane" id="panel-18342">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>作业名字</th>
+                                <th>作业描述</th>
+                                <th>学生名</th>
+                                <th>操作</th>
+                            </tr>
+                            <tr ng-repeat="x in readNotitems">
+                                <!-- <td>{{ $index + 1 }}</td> -->
+                                <td ng-bind="x.workName"></td>
+                                <td ng-bind="x.workDesc"></td>
+                                <td ng-bind="x.studentName"></td>
+                                <td><a>批改作业</a></td>
+                            </tr>
+                        </table>
+                        <nav>
+                            <ul class="pagination">
+                                <li>
+                                    <a ng-click="readNotPrevious()">
+                                        <span>上一页</span>
+                                    </a>
+                                </li>
+                                <li ng-repeat="page in pageList" ng-class="{active: readNotisActivePage(page)}" >
+                                    <a ng-click="readNotselectPage(page)" >{{ page }}</a>
+                                </li>
+                                <li>
+                                    <a ng-click="readNotNext()">
+                                        <span>下一页</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ui-view></div>

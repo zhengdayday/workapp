@@ -3,6 +3,7 @@ package com.lunwen.ztt.service;
 import com.lunwen.ztt.model.StudentWork;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 学生作业情况service
@@ -13,11 +14,11 @@ import java.util.List;
  */
 public interface StudentWorkService {
 
-    /**
-     *
+    /** 查找作业
+     * @param wno 作业号
      * @return all Work
      */
-    public List<StudentWork> getAllWork();
+    public Map<String, Object> getListStudentWork(Long wno);
 
     /**
      * save work

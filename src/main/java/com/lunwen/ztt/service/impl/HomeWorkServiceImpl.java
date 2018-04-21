@@ -44,4 +44,9 @@ public class HomeWorkServiceImpl implements HomeWorkService{
         homeWorkDao.delete(homeWork);
         return true;
     }
+
+    @Override
+    public HomeWork getHomeWork(Long wno) {
+        return homeWorkDao.findHomeWorkByWno(wno);
+    }
 }

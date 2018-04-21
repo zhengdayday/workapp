@@ -34,4 +34,11 @@ public interface HomeWorkService {
      * @return boolean
      */
     public boolean delHomeWork(HomeWork homeWork);
+
+    /**
+     * 查找作业
+     * @param wno 作业号
+     * @return HomeWork
+     */
+    public HomeWork getHomeWork(Long wno);
 }

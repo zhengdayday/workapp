@@ -27,7 +27,7 @@ public class StudentWork {
 
     /** 成绩 */
     @Column(name = "grade")
-    private Long grade;
+    private String grade;
 
     /** 回答 */
     @Column(name = "answer")
@@ -36,9 +36,9 @@ public class StudentWork {
     @Column(name = "work_status")
     private String work_status;
 
-    /** 老师是否批改作业 */
+    /** 老师是否批改作业  0没改 1改了*/
     @Column(name = "work_read")
-    private String workRead;
+    private int workRead;
 
     public String getSno() {
         return sno;
@@ -56,11 +56,11 @@ public class StudentWork {
         this.wno = wno;
     }
 
-    public Long getGrade() {
+    public String getGrade() {
         return grade;
     }
 
-    public void setGrade(Long grade) {
+    public void setGrade(String grade) {
         this.grade = grade;
     }
 
@@ -80,11 +80,11 @@ public class StudentWork {
         this.work_status = work_status;
     }
 
-    public String getWorkRead() {
+    public int getWorkRead() {
         return workRead;
     }
 
-    public void setWorkRead(String workRead) {
+    public void setWorkRead(int workRead) {
         this.workRead = workRead;
     }
 

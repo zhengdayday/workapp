@@ -320,6 +320,129 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
             }
         })
+        .state('work',{
+            url:'/work?wno',
+            templateUrl: '../partials/work.html',
+            controller: function ($cookieStore, $scope,$state,Restangular,$stateParams) {
+                $scope.wno = $stateParams.wno;
+                $scope.workInfo=[];
+                $scope.workRead=[];
+                $scope.workNotRead=[];
+                $scope.getWorkInfo = function () {
+                    Restangular.one("homework/getWorkInfo").get({wno:$scope.wno}).then(function (response) {
+                        // 取得作业信息
+                        $scope.workInfo = response;
+                        console.log($scope.workInfo);
+                    });
+                    Restangular.one("studentWork/getWork").get({wno:$scope.wno}).then(function (response) {
+                        // 取得作业信息
+                        $scope.workRead = response.studentWorkRead;
+                        $scope.workRead = [
+                            {workName:"sdfsdf",workDesc:"zzzz",studentName:"zddd",gradle:"youxiuyouxiu 100!"}
+                        ]
+                        $scope.workNotRead = response.studentWorkNotRead;
+                        $scope.workNotRead = [
+                            {workName:"sdfsdf",workDesc:"zzzz",studentName:"zddd"}
+                        ]
+                        $scope.readpageSize = 5;
+                        // 分页数
+                        $scope.readpages = Math.ceil($scope.workRead.length / $scope.readpageSize);
+                        $scope.readnewPages = $scope.readpages > 5 ? 5 : $scope.readpages;
+                        $scope.readpageList = [];
+                        $scope.readselPage = 1;
+                        //设置表格数据源(分页)
+                        $scope.readsetData = function () {
+                            $scope.readitems = $scope.workRead.slice(($scope.readpageSize * ($scope.readselPage - 1)), ($scope.readselPage * $scope.readpageSize));//通过当前页数筛选出表格当前显示数据
+                        }
+                        $scope.readitems = $scope.workRead.slice(0, $scope.readpageSize);
+                        //分页要repeat的数组
+                        for (var i = 0; i < $scope.readnewPages; i++) {
+                            $scope.readpageList.push(i + 1);
+                        }
+                        //打印当前选中页索引
+                        $scope.readselectPage = function (page) {
+                            //不能小于1大于最大
+                            if (page < 1 || page > $scope.readpages) return;
+                            //最多显示分页数5
+                            if (page > 2) {
+                                //因为只显示5个页数，大于2页开始分页转换
+                                var newpageList = [];
+                                for (var i = (page - 3) ; i < ((page + 2) > $scope.readpages ? $scope.readpages : (page + 2)) ; i++) {
+                                    newpageList.push(i + 1);
+                                }
+                                $scope.readpageList = newpageList;
+                            }
+                            $scope.readselPage = page;
+                            $scope.readsetData();
+                            $scope.readisActivePage(page);
+                            console.log("选择的页：" + page);
+                        };
+                        //设置当前选中页样式
+                        $scope.readisActivePage = function (page) {
+                            return $scope.readselPage == page;
+                        };
+                        //上一页
+                        $scope.readPrevious = function () {
+                            $scope.readselectPage($scope.readselPage - 1);
+                        }
+                        //下一页
+                        $scope.readNext = function () {
+                            $scope.readselectPage($scope.readselPage + 1);
+                        };
+
+
+
+                        $scope.readNotpageSize = 5;
+                        // 分页数
+                        $scope.readNotpages = Math.ceil($scope.workNotRead.length / $scope.readNotpageSize);
+                        $scope.readNotnewPages = $scope.readNotpages > 5 ? 5 : $scope.readNotpages;
+                        $scope.readNotpageList = [];
+                        $scope.readNotselPage = 1;
+                        //设置表格数据源(分页)
+                        $scope.readNotsetData = function () {
+                            $scope.readNotitems = $scope.workNotRead.slice(($scope.readNotpageSize * ($scope.readNotselPage - 1)), ($scope.readNotselPage * $scope.readNotpageSize));//通过当前页数筛选出表格当前显示数据
+                        }
+                        $scope.readNotitems = $scope.workNotRead.slice(0, $scope.readNotpageSize);
+                        //分页要repeat的数组
+                        for (var i = 0; i < $scope.readNotnewPages; i++) {
+                            $scope.readNotpageList.push(i + 1);
+                        }
+                        //打印当前选中页索引
+                        $scope.readNotselectPage = function (page) {
+                            //不能小于1大于最大
+                            if (page < 1 || page > $scope.readNotpages) return;
+                            //最多显示分页数5
+                            if (page > 2) {
+                                //因为只显示5个页数，大于2页开始分页转换
+                                var newpageList = [];
+                                for (var i = (page - 3) ; i < ((page + 2) > $scope.readNotpages ? $scope.readNotpages : (page + 2)) ; i++) {
+                                    newpageList.push(i + 1);
+                                }
+                                $scope.readNotpageList = newpageList;
+                            }
+                            $scope.readNotselPage = page;
+                            $scope.readNotsetData();
+                            $scope.readNotisActivePage(page);
+                            console.log("选择的页：" + page);
+                        };
+                        //设置当前选中页样式
+                        $scope.readNotisActivePage = function (page) {
+                            return $scope.readNotselPage == page;
+                        };
+                        //上一页
+                        $scope.readNotPrevious = function () {
+                            $scope.readNotselectPage($scope.readNotselPage - 1);
+                        }
+                        //下一页
+                        $scope.readNotNext = function () {
+                            $scope.readNotselectPage($scope.readNotselPage + 1);
+                        };
+                    });
+                }
+                $scope.getWorkInfo();
+                //$scope.workInfo = {};
+            }
+        })
         .state('about', {
             url: '/about',
             views: {
@@ -355,3 +478,9 @@ zttApp.controller('scotchController', function($scope) {
     ];
 
 });
+
+zttApp.filter("parseHTML", function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    }
+})
