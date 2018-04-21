@@ -36,7 +36,7 @@ public class LessonController {
      */
     @RequestMapping(value = "/allLesson", method = RequestMethod.GET)
     public Map<String, Object> getAllLesson() {
-        List<Lesson> list =  lessonService.getAllLesson();
+        List<LessonView> list =  lessonService.getAllLesson();
         Map<String, Object> map = new HashMap<>();
         map.put("lessonList", list);
         return map;

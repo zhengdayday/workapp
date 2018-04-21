@@ -19,7 +19,7 @@ public class UserController {
 
     /**
      * 通过名字获取User
-     * @param userName
+     * @param userName name
      * @return User
      */
     @RequestMapping(value = "/byname",method = RequestMethod.GET)
@@ -29,7 +29,7 @@ public class UserController {
 
     /**
      * get all user
-     * @return
+     * @return Mpa
      */
     @RequestMapping(value = "/allUser", method = RequestMethod.GET)
     public Map<String, Object> getAllUser() {
@@ -40,7 +40,7 @@ public class UserController {
 
     /**
      * 学生注册
-     * @param user
+     * @param user 学生
      * @return boolean
      */
     @RequestMapping(value = "/save",method = RequestMethod.POST)
@@ -53,6 +53,26 @@ public class UserController {
         }
     }
 
+    /**
+     * 教师注册
+     * @param user 老师
+     * @return boolean
+     */
+    @RequestMapping(value = "/saveTeacher",method = RequestMethod.POST)
+    public boolean saveTeacher(@RequestBody User user){
+        if(userService.saveTeacher(user)) {
+            return false;
+        } else {
+            //邮箱已经被使用
+            return true;
+        }
+    }
+
+    /**
+     * 登录
+     * @param user user
+     * @return map
+     */
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public Map<String, Object> login(@RequestBody User user) {
         User finUser = userService.login(user);

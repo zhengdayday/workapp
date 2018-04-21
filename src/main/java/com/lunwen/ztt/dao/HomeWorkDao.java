@@ -18,7 +18,7 @@ public interface HomeWorkDao extends JpaRepository<HomeWork, Long> {
      * @param tno 工号
      * @return list work
      */
-    List<HomeWork> findHomeWorkByTno(String tno);
+    List<HomeWork> findAllByTno(String tno);
 
     /**
      * 工号 作业名 获取作业
@@ -34,4 +34,11 @@ public interface HomeWorkDao extends JpaRepository<HomeWork, Long> {
      * @return work
      */
     HomeWork findHomeWorkByWno(Long wno);
+
+    /**
+     * 查找作业
+     * @param lno 课程号
+     * @return list work
+     */
+    List<HomeWork> findAllByLno(Long lno);
 }

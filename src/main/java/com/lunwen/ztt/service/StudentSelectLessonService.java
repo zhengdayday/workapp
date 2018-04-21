@@ -1,6 +1,8 @@
 package com.lunwen.ztt.service;
 
+import com.lunwen.ztt.model.Lesson;
 import com.lunwen.ztt.model.StudentSelectLesson;
+import com.lunwen.ztt.view.StudentLesson;
 
 import java.util.List;
 
@@ -12,7 +14,17 @@ import java.util.List;
  */
 public interface StudentSelectLessonService {
 
-    public List<StudentSelectLesson> getAllSsl();
+    /**
+     * 获得学生所有在选课情况
+     * @param sno sno
+     * @return list
+     */
+    public List<StudentLesson> getAllSsl(String sno);
 
-
+    /**
+     * 保存课程
+     * @param studentSelectLesson ssl
+     * @return boolean
+     */
+    public boolean saveSsl(StudentSelectLesson studentSelectLesson);
 }

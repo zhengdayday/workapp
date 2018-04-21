@@ -33,8 +33,9 @@ public class StudentWork {
     @Column(name = "answer")
     private String answer;
 
+    /** 是否完成 0没完成 1完成*/
     @Column(name = "work_status")
-    private String work_status;
+    private int work_status;
 
     /** 老师是否批改作业  0没改 1改了*/
     @Column(name = "work_read")
@@ -72,11 +73,11 @@ public class StudentWork {
         this.answer = answer;
     }
 
-    public String getWork_status() {
+    public int getWork_status() {
         return work_status;
     }
 
-    public void setWork_status(String work_status) {
+    public void setWork_status(int work_status) {
         this.work_status = work_status;
     }
 
@@ -85,6 +86,17 @@ public class StudentWork {
     }
 
     public void setWorkRead(int workRead) {
+        this.workRead = workRead;
+    }
+
+    public StudentWork() {
+
+    }
+
+    public StudentWork(String sno, Long wno, int work_status, int workRead) {
+        this.sno = sno;
+        this.wno = wno;
+        this.work_status = work_status;
         this.workRead = workRead;
     }
 

@@ -18,7 +18,7 @@ public interface LessonService {
      * 获得所有的课程
      * @return list
      */
-    public List<Lesson> getAllLesson();
+    public List<LessonView> getAllLesson();
 
     /**
      * 保存课程

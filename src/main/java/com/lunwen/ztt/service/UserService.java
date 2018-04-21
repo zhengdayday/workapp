@@ -27,6 +27,13 @@ public interface UserService {
     public boolean saveUser(User user);
 
     /**
+     * save teacher
+     * @param user uer
+     * @return boolean
+     */
+    public boolean saveTeacher(User user);
+
+    /**
      * login
      * @param user user
      * @return user

@@ -2,25 +2,29 @@ package com.lunwen.ztt.view;
 
 /**
  * Created with IDEA
- * author: wangjie
- * Date: 18-4-20
- * Time: 上午10:00
+ * author: daydayofzheng
+ * Date: 18-4-21
+ * Time: 下午3:08
  */
-public class LessonView {
+public class StudentLesson {
 
-    private Long lno;
+    private String teacherName;
 
     private String lessonName;
 
     private String lessonDesc;
 
-    private String teacherName;
+    private Long lno;
 
-    public LessonView(Long lno, String lessonName, String lessonDesc, String teacherName) {
-        this.lno = lno;
+    public StudentLesson() {
+
+    }
+
+    public StudentLesson(String teacherName, String lessonName, String lessonDesc, Long lno) {
+        this.teacherName = teacherName;
         this.lessonName = lessonName;
         this.lessonDesc = lessonDesc;
-        this.teacherName = teacherName;
+        this.lno = lno;
     }
 
     public Long getLno() {
@@ -29,6 +33,14 @@ public class LessonView {
 
     public void setLno(Long lno) {
         this.lno = lno;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public String getLessonName() {
@@ -45,17 +57,5 @@ public class LessonView {
 
     public void setLessonDesc(String lessonDesc) {
         this.lessonDesc = lessonDesc;
-    }
-
-    public String getTeacherName() {
-        return teacherName;
-    }
-
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
-    }
-
-    public LessonView() {
-
     }
 }

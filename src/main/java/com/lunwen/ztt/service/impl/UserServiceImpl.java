@@ -27,8 +27,22 @@ public class UserServiceImpl implements UserService{
     public boolean saveUser(User user) {
         User findUserByEmail = userDao.findUserByEmail(user.getEmail());
         User findUserByNumber = userDao.findUserByNumber(user.getNumber());
-        if(findUserByEmail == null || findUserByNumber == null) {
+        if(findUserByEmail == null && findUserByNumber == null) {
             // 只能学生注册
+            user.setLevel(0);
+            userDao.save(user);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    @Transactional
+    public boolean saveTeacher(User user) {
+        User findUserByEmail = userDao.findUserByEmail(user.getEmail());
+        User findUserByNumber = userDao.findUserByNumber(user.getNumber());
+        if(findUserByEmail == null && findUserByNumber == null) {
+            // 只能教师注册
             user.setLevel(1);
             userDao.save(user);
             return true;

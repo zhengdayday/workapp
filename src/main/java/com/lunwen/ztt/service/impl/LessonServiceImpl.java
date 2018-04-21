@@ -34,8 +34,15 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     @Transactional
-    public List<Lesson> getAllLesson() {
-        return lessonDao.findAll();
+    public List<LessonView> getAllLesson() {
+        List<Lesson> list = lessonDao.findAll();
+        List<LessonView> lessonViews = new ArrayList<>();
+        for (Lesson lesson : list) {
+            User user = userDao.findUserByNumber(lesson.getTno());
+            LessonView lessonView = new LessonView(lesson.getLno(), lesson.getLessonName(), lesson.getDesc(), user.getName());
+            lessonViews.add(lessonView);
+        }
+        return lessonViews;
     }
 
     @Override
@@ -61,11 +68,11 @@ public class LessonServiceImpl implements LessonService {
     @Transactional
     public List<LessonView> getTeacherLesson(String tno) {
         //查找教师的所有课程
-        List<Lesson> list = lessonDao.findLessonByTno(tno);
+        List<Lesson> list = lessonDao.findAllByTno(tno);
         List<LessonView> viewList = new ArrayList<>();
         User user = userDao.findUserByNumber(tno);
         for (Lesson lesson : list) {
-            LessonView view = new LessonView(lesson.getLno(), lesson.getLessonName(), lesson.getLno(), user.getName());
+            LessonView view = new LessonView(lesson.getLno(), lesson.getLessonName(), lesson.getDesc(), user.getName());
             viewList.add(view);
         }
         return viewList;

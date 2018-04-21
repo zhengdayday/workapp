@@ -69,12 +69,29 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url: '/register',
             templateUrl: '../partials/register.html',
             controller:function ($cookieStore,$scope,$state,Restangular) {
+
+                // 学生注册
                 $scope.user = null;
                 $scope.regSucc = false;
                 $scope.register = function () {
                     Restangular.one("users/save").customPOST($scope.user).then(function (value) {
                         $scope.regSucc = value;
                         if ($scope.regSucc == false) {
+                            //注册成功跳转到登录页面
+                            $state.go('home.login');
+                        }
+                    }, function (err) {
+                        console.warn(err);
+                    });
+                };
+
+                //教师注册
+                $scope.teacher = null;
+                $scope.regSucc1 = false;
+                $scope.registerTeacher = function () {
+                    Restangular.one("users/saveTeacher").customPOST($scope.teacher).then(function (value) {
+                        $scope.regSucc1 = value;
+                        if ($scope.regSucc1 == false) {
                             //注册成功跳转到登录页面
                             $state.go('home.login');
                         }
@@ -440,6 +457,135 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                     });
                 }
                 $scope.getWorkInfo();
+                //$scope.workInfo = {};
+            }
+        })
+        .state('studentLesson',{
+            url:'/studentLesson',
+            templateUrl: '../partials/userLesson.html',
+            controller: function ($cookieStore, $scope,$state,Restangular) {
+                $scope.lessonInfo=[];
+                $scope.lessonSave=[];
+                $scope.lessons = function () {
+                    Restangular.one("ssl/getAllSsl").get({sno: localStorage.getItem("number")}).then(function (response) {
+                        Restangular.one("lesson/allLesson").get().then(function (response) {
+                            // 取得所有课程的信息
+                            $scope.lessonInfo = response.lessonList;
+                            $scope.lessonInfopageSize = 5;
+                            // 分页数
+                            $scope.lessonInfopages = Math.ceil($scope.lessonInfo.length / $scope.lessonInfopageSize);
+                            $scope.lessonInfonewPages = $scope.lessonInfopages > 5 ? 5 : $scope.lessonInfopages;
+                            $scope.lessonInfopageList = [];
+                            $scope.lessonInfoselPage = 1;
+                            //设置表格数据源(分页)
+                            $scope.lessonInfosetData = function () {
+                                $scope.lessonInfoitems = $scope.lessonInfo.slice(($scope.lessonInfopageSize * ($scope.lessonInfoselPage - 1)), ($scope.lessonInfoselPage * $scope.lessonInfopageSize));//通过当前页数筛选出表格当前显示数据
+                            }
+                            $scope.lessonInfoitems = $scope.lessonInfo.slice(0, $scope.lessonInfopageSize);
+                            //分页要repeat的数组
+                            for (var i = 0; i < $scope.lessonInfonewPages; i++) {
+                                $scope.lessonInfopageList.push(i + 1);
+                            }
+                            //打印当前选中页索引
+                            $scope.lessonInfoselectPage = function (page) {
+                                //不能小于1大于最大
+                                if (page < 1 || page > $scope.lessonInfopages) return;
+                                //最多显示分页数5
+                                if (page > 2) {
+                                    //因为只显示5个页数，大于2页开始分页转换
+                                    var newpageList = [];
+                                    for (var i = (page - 3) ; i < ((page + 2) > $scope.lessonInfopages ? $scope.lessonInfopages : (page + 2)) ; i++) {
+                                        newpageList.push(i + 1);
+                                    }
+                                    $scope.lessonInfopageList = newpageList;
+                                }
+                                $scope.lessonInfoselPage = page;
+                                $scope.lessonInfosetData();
+                                $scope.lessonInfoisActivePage(page);
+                                console.log("选择的页：" + page);
+                            };
+                            //设置当前选中页样式
+                            $scope.lessonInfoisActivePage = function (page) {
+                                return $scope.lessonInfoselPage == page;
+                            };
+                            //上一页
+                            $scope.lessonInfoPrevious = function () {
+                                $scope.lessonInfoselectPage($scope.lessonInfoselPage - 1);
+                            }
+                            //下一页
+                            $scope.lessonInfoNext = function () {
+                                $scope.lessonInfoselectPage($scope.lessonInfoselPage + 1);
+                            };
+
+
+                            console.log($scope.lessonInfo);
+                        });
+                        // 取得选生选修课程在信息
+                        $scope.lessonSave = response.studentLesson;
+                        $scope.lessonSavepageSize = 5;
+                        // 分页数
+                        $scope.lessonSavepages = Math.ceil($scope.lessonSave.length / $scope.lessonSavepageSize);
+                        $scope.lessonSavenewPages = $scope.lessonSavepages > 5 ? 5 : $scope.lessonSavepages;
+                        $scope.lessonSavepageList = [];
+                        $scope.lessonSaveselPage = 1;
+                        //设置表格数据源(分页)
+                        $scope.lessonSavesetData = function () {
+                            $scope.lessonSaveitems = $scope.lessonSave.slice(($scope.lessonSavepageSize * ($scope.lessonSaveselPage - 1)), ($scope.lessonSaveselPage * $scope.lessonSavepageSize));//通过当前页数筛选出表格当前显示数据
+                        }
+                        $scope.lessonSaveitems = $scope.lessonSave.slice(0, $scope.lessonSavepageSize);
+                        //分页要repeat的数组
+                        for (var i = 0; i < $scope.lessonSavenewPages; i++) {
+                            $scope.lessonSavepageList.push(i + 1);
+                        }
+                        //打印当前选中页索引
+                        $scope.lessonSaveselectPage = function (page) {
+                            //不能小于1大于最大
+                            if (page < 1 || page > $scope.lessonSavepages) return;
+                            //最多显示分页数5
+                            if (page > 2) {
+                                //因为只显示5个页数，大于2页开始分页转换
+                                var newpageList = [];
+                                for (var i = (page - 3) ; i < ((page + 2) > $scope.lessonSavepages ? $scope.lessonSavepages : (page + 2)) ; i++) {
+                                    newpageList.push(i + 1);
+                                }
+                                $scope.lessonSavepageList = newpageList;
+                            }
+                            $scope.lessonSaveselPage = page;
+                            $scope.lessonSavesetData();
+                            $scope.lessonSaveisActivePage(page);
+                            console.log("选择的页：" + page);
+                        };
+                        //设置当前选中页样式
+                        $scope.lessonSaveisActivePage = function (page) {
+                            return $scope.lessonSaveselPage == page;
+                        };
+                        //上一页
+                        $scope.lessonSavePrevious = function () {
+                            $scope.lessonSaveselectPage($scope.lessonSaveselPage - 1);
+                        }
+                        //下一页
+                        $scope.lessonSaveNext = function () {
+                            $scope.lessonSaveselectPage($scope.lessonSaveselPage + 1);
+                        };
+                    });
+                }
+                $scope.lessons();
+                $scope.studentSaveLesson =function (lno) {
+                    $scope.ssl = {lno:lno,sno:localStorage.getItem("number")};
+                    Restangular.one("ssl/saveSsl").customPOST($scope.ssl).then(function (value) {
+                        if(value == true) {
+                            swal("选课成功");
+                            $scope.lessons();
+                        } else {
+                            swal("已经选过该课程");
+                        }
+                        $scope.work = {};
+                        $scope.getAllWork();
+                    }, function (err) {
+                        swal("选课失败");
+                        console.warn(err);
+                    });
+                }
                 //$scope.workInfo = {};
             }
         })
