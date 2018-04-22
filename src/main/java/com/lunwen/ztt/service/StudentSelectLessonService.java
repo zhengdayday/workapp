@@ -10,8 +10,6 @@ import java.util.Map;
 /**
  * Created with IDEA
  * author: wangjie
- * Date: 18-4-19
- * Time: 下午8:47
  */
 public interface StudentSelectLessonService {
 

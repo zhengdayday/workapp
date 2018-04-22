@@ -67,6 +67,7 @@
                                 <th>作业名字</th>
                                 <th>作业描述</th>
                                 <th>学生名</th>
+                                <th>状态</th>
                                 <th>操作</th>
                             </tr>
                             <tr ng-repeat="x in readNotitems">
@@ -75,6 +76,7 @@
                                 <td ng-bind="x.workName"></td>
                                 <td ng-bind="x.workDesc"></td>
                                 <td ng-bind="x.studentName"></td>
+                                <td ng-bind="x.workStatus"></td>
                                 <td><a ui-sref="readWork({wno:{{x.wno}},sno:'{{x.sno}}'})">批改作业</a></td>
                             </tr>
                         </table>

@@ -23,8 +23,6 @@ import java.util.Map;
 /**
  * Created with IDEA
  * author: wangjie
- * Date: 18-4-19
- * Time: 下午7:51
  */
 @Service
 public class StudentWorkServiceImpl implements StudentWorkService {
@@ -61,8 +59,13 @@ public class StudentWorkServiceImpl implements StudentWorkService {
                 HomeWork homeWork = homeWorkDao.findHomeWorkByWno(studentWork.getWno());
                 User user = userDao.findUserByNumber(studentWork.getSno());
                 Lesson lesson = lessonDao.findLessonByLno(homeWork.getLno());
-                WorkView view = new WorkView(homeWork.getWorkName(), homeWork.getDesc(), user.getName(), lesson.getLessonName(), studentWork.getSno(), studentWork.getWno());
-                listNotRead.add(view);
+                if(studentWork.getWork_status() == 1) {
+                    WorkView view = new WorkView(homeWork.getWorkName(), homeWork.getDesc(), user.getName(), lesson.getLessonName(), studentWork.getSno(), studentWork.getWno(), "已做");
+                    listNotRead.add(view);
+                } else {
+                    WorkView view = new WorkView(homeWork.getWorkName(), homeWork.getDesc(), user.getName(), lesson.getLessonName(), studentWork.getSno(), studentWork.getWno(), "未做");
+                    listNotRead.add(view);
+                }
             }
         }
         map.put("studentRead", listRead);

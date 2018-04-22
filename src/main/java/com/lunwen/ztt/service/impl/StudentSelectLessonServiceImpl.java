@@ -17,8 +17,6 @@ import java.util.Map;
 /**
  * Created with IDEA
  * author: wangjie
- * Date: 18-4-19
- * Time: 下午8:48
  */
 
 @Service
@@ -98,11 +96,16 @@ public class StudentSelectLessonServiceImpl implements StudentSelectLessonServic
                 continue;
             }
             if(studentWork.getGrade() != null) {
-                StudentWorkView studentWorkView = new StudentWorkView(homeWork.getWorkName(), homeWork.getDesc(), "已完成", studentWork.getGrade(), lesson.getLessonName(), homeWork.getWno());
+                StudentWorkView studentWorkView = new StudentWorkView(homeWork.getWorkName(), homeWork.getDesc(), "已做", studentWork.getGrade(), lesson.getLessonName(), homeWork.getWno());
                 viewListok.add(studentWorkView);
             } else {
-                StudentWorkView studentWorkView = new StudentWorkView(homeWork.getWorkName(), homeWork.getDesc(), "未完成", lesson.getLessonName(), homeWork.getWno());
-                viewListno.add(studentWorkView);
+                if(studentWork.getWork_status() == 0) {
+                    StudentWorkView studentWorkView = new StudentWorkView(homeWork.getWorkName(), homeWork.getDesc(), "未做", lesson.getLessonName(), homeWork.getWno());
+                    viewListno.add(studentWorkView);
+                } else {
+                    StudentWorkView studentWorkView = new StudentWorkView(homeWork.getWorkName(), homeWork.getDesc(), "已做", lesson.getLessonName(), homeWork.getWno());
+                    viewListno.add(studentWorkView);
+                }
             }
         }
         Map<String, Object> map = new HashMap<>();

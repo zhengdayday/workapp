@@ -9,8 +9,6 @@ import java.util.List;
  * 教师管理课程作业service
  * Created with IDEA
  * author: wangjie
- * Date: 18-4-19
- * Time: 下午8:03
  */
 public interface HomeWorkService {
 

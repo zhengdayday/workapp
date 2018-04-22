@@ -2,9 +2,7 @@ package com.lunwen.ztt.view;
 
 /**
  * Created with IDEA
- * author: daydayofzheng
- * Date: 18-4-22
- * Time: 下午1:55
+ * author: wangjie
  */
 public class ReadProblem {
 

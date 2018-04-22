@@ -2,9 +2,7 @@ package com.lunwen.ztt.view;
 
 /**
  * Created with IDEA
- * author: daydayofzheng
- * Date: 18-4-21
- * Time: 下午3:08
+ * author: wangjie
  */
 public class StudentLesson {
 

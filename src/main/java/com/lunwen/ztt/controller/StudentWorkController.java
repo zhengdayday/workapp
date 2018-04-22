@@ -14,9 +14,7 @@ import java.util.Map;
 
 /**
  * Created with IDEA
- * author: daydayofzheng
- * Date: 18-4-21
- * Time: 下午12:36
+ * author: wangjie
  */
 @RestController
 @RequestMapping(value = "/studentWork")

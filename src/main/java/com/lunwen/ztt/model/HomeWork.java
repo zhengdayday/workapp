@@ -6,8 +6,6 @@ import javax.persistence.*;
  * 作业表
  * Created with IDEA
  * author: wangjie
- * Date: 18-4-18
- * Time: 下午6:09
  */
 @Entity
 @Table(name = "tbl_work")

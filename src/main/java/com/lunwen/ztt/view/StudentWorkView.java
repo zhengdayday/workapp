@@ -4,9 +4,7 @@ import com.lunwen.ztt.model.StudentSelectLesson;
 
 /**
  * Created with IDEA
- * author: daydayofzheng
- * Date: 18-4-22
- * Time: 上午10:08
+ * author: wangjie
  */
 public class StudentWorkView {
 

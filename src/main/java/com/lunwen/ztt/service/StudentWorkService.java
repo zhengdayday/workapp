@@ -10,8 +10,6 @@ import java.util.Map;
  * 学生作业情况service
  * Created with IDEA
  * author: wangjie
- * Date: 18-4-19
- * Time: 下午7:37
  */
 public interface StudentWorkService {
 

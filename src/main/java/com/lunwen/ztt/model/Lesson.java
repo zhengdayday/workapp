@@ -5,8 +5,6 @@ import javax.persistence.*;
 /** 课程表
  * Created with IDEA
  * author: wangjie
- * Date: 18-4-18
- * Time: 下午4:50
  */
 @Entity
 @Table(name = "lesson")

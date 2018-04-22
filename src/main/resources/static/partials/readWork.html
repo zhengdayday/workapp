@@ -8,16 +8,16 @@
                         <a href="javascript:; #panel-16186" data-toggle="tab">当前作业信息</a>
                     </li>
                     <li>
-                        <a href="javascript:; #panel-735528" data-toggle="tab">改作业作业</a>
+                        <a href="javascript:; #panel-735528" data-toggle="tab">改作业</a>
                     </li>
                 </ul>
                 <div class="tab-content">
                     <!-- 作业描述 -->
                     <div class="tab-pane active" id="panel-16186">
-                        <div>作业详情</div>
-                        <div ng-bind-html="student.workInfo | parseHTML"></div>
-                        <div>{{student.studentName}}的答案</div>
-                        <div ng-bind-html="student.answer | parseHTML"></div>
+                        <div><span style="color: #3385ff">作业详情</span></div>
+                        <div style="margin-top: 20px" ng-bind-html="student.workInfo | parseHTML"></div>
+                        <div><span style="color: #3385ff">{{student.studentName}}的答案</span></div>
+                        <div style="margin-top: 20px" ng-bind-html="student.answer | parseHTML"></div>
                     </div>
 
                     <!--改作业 -->

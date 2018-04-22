@@ -15,9 +15,7 @@ import java.util.Map;
 
 /**
  * Created with IDEA
- * author: daydayofzheng
- * Date: 18-4-21
- * Time: 下午3:04
+ * author: wangjie
  */
 
 @RestController

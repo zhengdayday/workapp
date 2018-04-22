@@ -15,8 +15,6 @@ import java.util.Map;
  * jwt
  * Created with IDEA
  * author: wangjie
- * Date: 18-4-17
- * Time: 下午5:21
  */
 public class JwtToken {
 

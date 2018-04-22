@@ -2,9 +2,7 @@ package com.lunwen.ztt.view;
 
 /**
  * Created with IDEA
- * author: daydayofzheng
- * Date: 18-4-21
- * Time: 下午12:27
+ * author: wangjie
  */
 public class WorkView {
 
@@ -21,6 +19,16 @@ public class WorkView {
     private String sno;
 
     private Long wno;
+
+    private String workStatus;
+
+    public String getWorkStatus() {
+        return workStatus;
+    }
+
+    public void setWorkStatus(String workStatus) {
+        this.workStatus = workStatus;
+    }
 
     public Long getWno() {
         return wno;
@@ -50,13 +58,14 @@ public class WorkView {
 
     }
 
-    public WorkView(String workName, String workDesc, String studentName, String lessonName, String sno, Long wno) {
+    public WorkView(String workName, String workDesc, String studentName, String lessonName, String sno, Long wno, String workStatus) {
         this.workName = workName;
         this.workDesc = workDesc;
         this.studentName = studentName;
         this.lessonName = lessonName;
         this.sno = sno;
         this.wno = wno;
+        this.workStatus = workStatus;
     }
 
     public WorkView(String workName, String workDesc, String studentName, String grade, String lessonName, String sno, Long wno) {

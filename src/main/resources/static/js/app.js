@@ -157,8 +157,9 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                    $scope.isTeacher = false;
                    $scope.loginName = "";
                    swal("已经注销，跳转到登录页面");
-                   $state.go('home.login');
                    location.reload();
+                   $state.go('home.login');
+
                }
             }
         })
