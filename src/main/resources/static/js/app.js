@@ -232,6 +232,62 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                             $scope.selectPage($scope.selPage + 1);
                         };
                     });
+
+                    Restangular.one("lesson/allLesson").get().then(function (response) {
+                        // 取得所有的课程
+                        $scope.datas = response.lessonList;
+                        /*
+                        $scope.data = [
+                            {lessonName: "dayday", teacherName: "wj"}
+                        ] mock数据
+                        */
+                        // 每页多少条数据
+                        $scope.pageSizes = 5;
+                        // 分页数
+                        $scope.pagess = Math.ceil($scope.datas.length / $scope.pageSizes);
+                        $scope.newPagess = $scope.pagess > 5 ? 5 : $scope.pagess;
+                        $scope.pageLists = [];
+                        $scope.selPages = 1;
+                        //设置表格数据源(分页)
+                        $scope.setDatas = function () {
+                            $scope.itemss = $scope.datas.slice(($scope.pageSizes * ($scope.selPages - 1)), ($scope.selPages * $scope.pageSizes));//通过当前页数筛选出表格当前显示数据
+                        }
+                        $scope.itemss = $scope.datas.slice(0, $scope.pageSizes);
+                        //分页要repeat的数组
+                        for (var i = 0; i < $scope.newPagess; i++) {
+                            $scope.pageLists.push(i + 1);
+                        }
+                        //打印当前选中页索引
+                        $scope.selectPages = function (page1) {
+                            //不能小于1大于最大
+                            if (page1 < 1 || page1 > $scope.pagess) return;
+                            //最多显示分页数5
+                            if (page1 > 2) {
+                                //因为只显示5个页数，大于2页开始分页转换
+                                var newpageList = [];
+                                for (var i = (page1 - 3) ; i < ((page1+ 2) > $scope.pagess ? $scope.pagess : (page1 + 2)) ; i++) {
+                                    newpageList.push(i + 1);
+                                }
+                                $scope.pageLists = newpageList;
+                            }
+                            $scope.selPages = page1;
+                            $scope.setDatas();
+                            $scope.isActivePages(page1);
+                            console.log("选择的页：" + page1);
+                        };
+                        //设置当前选中页样式
+                        $scope.isActivePages = function (page1) {
+                            return $scope.selPages == page1;
+                        };
+                        //上一页
+                        $scope.Previouss = function () {
+                            $scope.selectPages($scope.selPages - 1);
+                        }
+                        //下一页
+                        $scope.Nexts = function () {
+                            $scope.selectPages($scope.selPages + 1);
+                        };
+                    });
                 }
                 $scope.getAllLesson();
                 $scope.lesson = {};
@@ -260,7 +316,7 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                 $scope.lname = $stateParams.lname;
                 $scope.lno = $stateParams.lno;
                 $scope.getAllWork = function () {
-                    Restangular.one("homework/getAllWork").get({tno: localStorage.getItem("number")}).then(function (response) {
+                    Restangular.one("homework/getAllWork").get({lno: $scope.lno}).then(function (response) {
                         // 取得所有的作业
                         $scope.data = response.workList;
                         /*
@@ -337,6 +393,125 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
             }
         })
+        .state('sw',{
+            url:'/sw?lno',
+            templateUrl: '../partials/student-work.html',
+            controller: function ($cookieStore, $scope,$state,Restangular,$stateParams) {
+                $scope.lno = $stateParams.lno;
+                $scope.lessonInfo=[];
+                $scope.lessonOk=[];
+                $scope.lessonNo=[];
+                $scope.lessonBody = {lno:$scope.lno,sno:localStorage.getItem("number")};
+                $scope.getWorkOK = function () {
+                    Restangular.one("lesson/getLessonBylno").get({lno:$scope.lno}).then(function (response) {
+                        // 取得课程信息
+                        $scope.lessonInfo = response;
+                        console.log($scope.lessonInfo);
+                    });
+                    Restangular.one("ssl/getSsl").get({sno:localStorage.getItem("number"),lno:$scope.lno}).then(function (response) {
+                        // 取得作业信息
+                        $scope.okList = response.ok;
+                        $scope.noList = response.no;
+
+                        $scope.okListpageSize = 5;
+                        // 分页数
+                        $scope.okListpages = Math.ceil($scope.okList.length / $scope.okListpageSize);
+                        $scope.okListnewPages = $scope.okListpages > 5 ? 5 : $scope.okListpages;
+                        $scope.okListpageList = [];
+                        $scope.okListselPage = 1;
+                        //设置表格数据源(分页)
+                        $scope.okListsetData = function () {
+                            $scope.okListitems = $scope.okList.slice(($scope.okListpageSize * ($scope.okListselPage - 1)), ($scope.okListselPage * $scope.okListpageSize));//通过当前页数筛选出表格当前显示数据
+                        }
+                        $scope.okListitems = $scope.okList.slice(0, $scope.okListpageSize);
+                        //分页要repeat的数组
+                        for (var i = 0; i < $scope.okListnewPages; i++) {
+                            $scope.okListpageList.push(i + 1);
+                        }
+                        //打印当前选中页索引
+                        $scope.okListselectPage = function (page) {
+                            //不能小于1大于最大
+                            if (page < 1 || page > $scope.okListpages) return;
+                            //最多显示分页数5
+                            if (page > 2) {
+                                //因为只显示5个页数，大于2页开始分页转换
+                                var newpageList = [];
+                                for (var i = (page - 3) ; i < ((page + 2) > $scope.okListpages ? $scope.okListpages : (page + 2)) ; i++) {
+                                    newpageList.push(i + 1);
+                                }
+                                $scope.okListpageList = newpageList;
+                            }
+                            $scope.okListselPage = page;
+                            $scope.okListsetData();
+                            $scope.okListisActivePage(page);
+                            console.log("选择的页：" + page);
+                        };
+                        //设置当前选中页样式
+                        $scope.okListisActivePage = function (page) {
+                            return $scope.okListselPage == page;
+                        };
+                        //上一页
+                        $scope.okListPrevious = function () {
+                            $scope.okListselectPage($scope.okListselPage - 1);
+                        }
+                        //下一页
+                        $scope.okListNext = function () {
+                            $scope.okListselectPage($scope.okListselPage + 1);
+                        };
+
+
+
+                        $scope.noListpageSize = 5;
+                        // 分页数
+                        $scope.noListpages = Math.ceil($scope.noList.length / $scope.noListpageSize);
+                        $scope.noListnewPages = $scope.noListpages > 5 ? 5 : $scope.noListpages;
+                        $scope.noListpageList = [];
+                        $scope.noListselPage = 1;
+                        //设置表格数据源(分页)
+                        $scope.noListsetData = function () {
+                            $scope.noListitems = $scope.noList.slice(($scope.noListpageSize * ($scope.noListselPage - 1)), ($scope.noListselPage * $scope.noListpageSize));//通过当前页数筛选出表格当前显示数据
+                        }
+                        $scope.noListitems = $scope.noList.slice(0, $scope.noListpageSize);
+                        //分页要repeat的数组
+                        for (var i = 0; i < $scope.noListnewPages; i++) {
+                            $scope.noListpageList.push(i + 1);
+                        }
+                        //打印当前选中页索引
+                        $scope.noListselectPage = function (page) {
+                            //不能小于1大于最大
+                            if (page < 1 || page > $scope.noListpages) return;
+                            //最多显示分页数5
+                            if (page > 2) {
+                                //因为只显示5个页数，大于2页开始分页转换
+                                var newpageList = [];
+                                for (var i = (page - 3) ; i < ((page + 2) > $scope.noListpages ? $scope.noListpages : (page + 2)) ; i++) {
+                                    newpageList.push(i + 1);
+                                }
+                                $scope.noListpageList = newpageList;
+                            }
+                            $scope.noListselPage = page;
+                            $scope.noListsetData();
+                            $scope.noListisActivePage(page);
+                            console.log("选择的页：" + page);
+                        };
+                        //设置当前选中页样式
+                        $scope.noListisActivePage = function (page) {
+                            return $scope.noListselPage == page;
+                        };
+                        //上一页
+                        $scope.noListPrevious = function () {
+                            $scope.noListselectPage($scope.noListselPage - 1);
+                        }
+                        //下一页
+                        $scope.noListNext = function () {
+                            $scope.noListselectPage($scope.noListselPage + 1);
+                        };
+                    });
+                }
+                $scope.getWorkOK();
+                //$scope.workInfo = {};
+            }
+        })
         .state('work',{
             url:'/work?wno',
             templateUrl: '../partials/work.html',
@@ -354,13 +529,8 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                     Restangular.one("studentWork/getWork").get({wno:$scope.wno}).then(function (response) {
                         // 取得作业信息
                         $scope.workRead = response.studentWorkRead;
-                        $scope.workRead = [
-                            {workName:"sdfsdf",workDesc:"zzzz",studentName:"zddd",gradle:"youxiuyouxiu 100!"}
-                        ]
                         $scope.workNotRead = response.studentWorkNotRead;
-                        $scope.workNotRead = [
-                            {workName:"sdfsdf",workDesc:"zzzz",studentName:"zddd"}
-                        ]
+
                         $scope.readpageSize = 5;
                         // 分页数
                         $scope.readpages = Math.ceil($scope.workRead.length / $scope.readpageSize);
@@ -579,8 +749,7 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                         } else {
                             swal("已经选过该课程");
                         }
-                        $scope.work = {};
-                        $scope.getAllWork();
+                        $scope.lessons();
                     }, function (err) {
                         swal("选课失败");
                         console.warn(err);

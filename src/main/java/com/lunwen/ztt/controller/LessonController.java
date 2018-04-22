@@ -64,4 +64,14 @@ public class LessonController {
     public boolean saveLesson(@RequestBody Lesson lesson) {
       return   lessonService.saveLesson(lesson);
     }
+
+    /**
+     * 得到课程信息通过lno
+     * @param lno lno
+     * @return lesson
+     */
+    @RequestMapping(value = "/getLessonBylno", method = RequestMethod.GET)
+    public Lesson getLessonByLno(Long lno) {
+        return lessonService.getLessonByLno(lno);
+    }
 }

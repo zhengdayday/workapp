@@ -51,4 +51,18 @@ public class StudentSelectLessonController {
     public boolean saveSsl(@RequestBody StudentSelectLesson studentSelectLesson) {
         return studentSelectLessonService.saveSsl(studentSelectLesson);
     }
+
+    /**
+     * 得到学生作业列表
+     * @param sno sno
+     * @param lno lno
+     * @return map
+     */
+    @RequestMapping(value = "/getSsl", method = RequestMethod.GET)
+    public Map<String, Object> getSnoWork(String sno, Long lno) {
+        StudentSelectLesson ssl = new StudentSelectLesson();
+        ssl.setLno(lno);
+        ssl.setSno(sno);
+        return studentSelectLessonService.getStudentWorks(ssl);
+    }
 }

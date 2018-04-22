@@ -4,75 +4,83 @@
             <div class="tabbable" id="tabs-390357">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="javascript:; #panel-16186" data-toggle="tab">所有课程</a>
+                        <a href="javascript:; #panel-735528" data-toggle="tab">已完成作业</a>
                     </li>
+
                     <li>
-                        <a href="javascript:; #panel-735528" data-toggle="tab">我的课程</a>
+                        <a href="javascript:; #panel-18342" data-toggle="tab">未完成作业</a>
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane active" id="panel-16186">
+                    <!-- 已完成作业 -->
+                    <div class="tab-pane active" id="panel-735528">
                         <table class="table table-bordered">
                             <tr>
                                 <th>课程名</th>
-                                <th>课程描述</th>
-                                <th>教师名</th>
-                                <th>操作</th>
+                                <th>作业名</th>
+                                <th>作业描述</th>
+                                <th>完成情况</th>
+                                <th>成绩/评价</th>
                             </tr>
-                            <tr ng-repeat="x in lessonInfoitems">
+                            <tr ng-repeat="x in okListitems">
                                 <!-- <td>{{ $index + 1 }}</td> -->
                                 <td ng-bind="x.lessonName"></td>
-                                <td ng-bind="x.lessonDesc"></td>
-                                <td ng-bind="x.teacherName"></td>
-                                <td><a ng-click="studentSaveLesson(x.lno)">选课</a></td>
+                                <td ng-bind="x.workName"></td>
+                                <td ng-bind="x.workDesc"></td>
+                                <td ng-bind="x.workStatus"></td>
+                                <td ng-bind="x.gradle"></td>
                             </tr>
                         </table>
                         <nav>
                             <ul class="pagination">
                                 <li>
-                                    <a ng-click="lessonInfoPrevious()">
+                                    <a ng-click="okListPrevious()">
                                         <span>上一页</span>
                                     </a>
                                 </li>
-                                <li ng-repeat="page in lessonInfopageList" ng-class="{active: lessonInfoisActivePage(page)}" >
-                                    <a ng-click="lessonInfoselectPage(page)" >{{ page }}</a>
+                                <li ng-repeat="page in okListpageList" ng-class="{active: okListisActivePage(page)}" >
+                                    <a ng-click="okListselectPage(page)" >{{ page }}</a>
                                 </li>
                                 <li>
-                                    <a ng-click="lessonInfoNext()">
+                                    <a ng-click="okListNext()">
                                         <span>下一页</span>
                                     </a>
                                 </li>
                             </ul>
                         </nav>
                     </div>
-                    <div class="tab-pane" id="panel-735528">
+
+                    <!-- 未完成作业 -->
+                    <div class="tab-pane" id="panel-18342">
                         <table class="table table-bordered">
                             <tr>
                                 <th>课程名</th>
-                                <th>课程描述</th>
-                                <th>教师名</th>
+                                <th>作业名</th>
+                                <th>作业描述</th>
+                                <th>完成情况</th>
                                 <th>操作</th>
                             </tr>
-                            <tr ng-repeat="x in lessonSaveitems">
+                            <tr ng-repeat="x in noListitems">
                                 <!-- <td>{{ $index + 1 }}</td> -->
                                 <td ng-bind="x.lessonName"></td>
-                                <td ng-bind="x.lessonDesc"></td>
-                                <td ng-bind="x.teacherName"></td>
-                                <td><a ui-sref="sw({lno:{{x.lno}}})">查看课程的作业</a></td>
+                                <td ng-bind="x.workName"></td>
+                                <td ng-bind="x.workDesc"></td>
+                                <td ng-bind="x.workStatus"></td>
+                                <td><a ui-sref="">做作业</a></td>
                             </tr>
                         </table>
                         <nav>
                             <ul class="pagination">
                                 <li>
-                                    <a ng-click="lessonSavePrevious()">
+                                    <a ng-click="noListPrevious()">
                                         <span>上一页</span>
                                     </a>
                                 </li>
-                                <li ng-repeat="page in lessonSavepageList" ng-class="{active: lessonSaveisActivePage(page)}" >
-                                    <a ng-click="lessonSaveselectPage(page)" >{{ page }}</a>
+                                <li ng-repeat="page in noListpageList" ng-class="{active: noListisActivePage(page)}" >
+                                    <a ng-click="noListselectPage(page)" >{{ page }}</a>
                                 </li>
                                 <li>
-                                    <a ng-click="lessonSaveNext()">
+                                    <a ng-click="noListNext()">
                                         <span>下一页</span>
                                     </a>
                                 </li>

@@ -26,14 +26,12 @@
                             <tr>
                                 <th>作业名字</th>
                                 <th>作业描述</th>
-                                <th>学生名</th>
                                 <th>评价</th>
                             </tr>
                             <tr ng-repeat="x in readitems">
                                 <!-- <td>{{ $index + 1 }}</td> -->
                                 <td ng-bind="x.workName"></td>
                                 <td ng-bind="x.workDesc"></td>
-                                <td ng-bind="x.studentName"></td>
                                 <td ng-bind="x.gradle"></td>
                             </tr>
                         </table>
@@ -44,7 +42,7 @@
                                         <span>上一页</span>
                                     </a>
                                 </li>
-                                <li ng-repeat="page in pageList" ng-class="{active: readisActivePage(page)}" >
+                                <li ng-repeat="page in readpageList" ng-class="{active: readisActivePage(page)}" >
                                     <a ng-click="readselectPage(page)" >{{ page }}</a>
                                 </li>
                                 <li>
@@ -62,15 +60,13 @@
                             <tr>
                                 <th>作业名字</th>
                                 <th>作业描述</th>
-                                <th>学生名</th>
                                 <th>操作</th>
                             </tr>
                             <tr ng-repeat="x in readNotitems">
                                 <!-- <td>{{ $index + 1 }}</td> -->
                                 <td ng-bind="x.workName"></td>
                                 <td ng-bind="x.workDesc"></td>
-                                <td ng-bind="x.studentName"></td>
-                                <td><a>批改作业</a></td>
+                                <td><a>提交作业</a></td>
                             </tr>
                         </table>
                         <nav>
@@ -80,7 +76,7 @@
                                         <span>上一页</span>
                                     </a>
                                 </li>
-                                <li ng-repeat="page in pageList" ng-class="{active: readNotisActivePage(page)}" >
+                                <li ng-repeat="page in readNotpageList" ng-class="{active: readNotisActivePage(page)}" >
                                     <a ng-click="readNotselectPage(page)" >{{ page }}</a>
                                 </li>
                                 <li>

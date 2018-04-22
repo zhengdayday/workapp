@@ -5,6 +5,7 @@ import com.lunwen.ztt.model.StudentSelectLesson;
 import com.lunwen.ztt.view.StudentLesson;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IDEA
@@ -27,4 +28,7 @@ public interface StudentSelectLessonService {
      * @return boolean
      */
     public boolean saveSsl(StudentSelectLesson studentSelectLesson);
+
+
+    public Map<String, Object> getStudentWorks(StudentSelectLesson ssl);
 }

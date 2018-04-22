@@ -10,6 +10,7 @@ import com.lunwen.ztt.service.StudentWorkService;
 import com.lunwen.ztt.view.WorkView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +38,7 @@ public class StudentWorkServiceImpl implements StudentWorkService {
 
 
     @Override
+    @Transactional
     public Map<String, Object> getListStudentWork(Long wno) {
         List<StudentWork> studentWorks = studentWorkDao.findAllByWno(wno);
         Map<String, Object> map = new HashMap<>();

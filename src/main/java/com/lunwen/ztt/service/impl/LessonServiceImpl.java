@@ -77,4 +77,10 @@ public class LessonServiceImpl implements LessonService {
         }
         return viewList;
     }
+
+    @Override
+    @Transactional
+    public Lesson getLessonByLno(Long lno) {
+        return lessonDao.findLessonByLno(lno);
+    }
 }

@@ -41,4 +41,11 @@ public interface LessonService {
      */
     public List<LessonView> getTeacherLesson(String tno);
 
+    /**
+     * 得到课程通过lno
+     * @param lno 课程号
+     * @return Lesson
+     */
+    public Lesson getLessonByLno(Long lno);
+
 }

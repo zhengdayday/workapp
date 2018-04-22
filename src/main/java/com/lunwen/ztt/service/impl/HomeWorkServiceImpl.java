@@ -33,8 +33,8 @@ public class HomeWorkServiceImpl implements HomeWorkService{
     private StudentWorkDao studentWorkDao;
 
     @Override
-    public List<HomeWork> getAllHomeWork(String tno) {
-        return homeWorkDao.findAllByTno(tno);
+    public List<HomeWork> getAllHomeWork(Long lno) {
+        return homeWorkDao.findAllByLno(lno);
     }
 
     @Override
@@ -45,6 +45,10 @@ public class HomeWorkServiceImpl implements HomeWorkService{
             homeWorkDao.save(homeWork);
             StudentSelectLesson studentSelectLesson = studentSelectLessonDao.findStudentSelectLessonByLno(homeWork.getLno());
             if(studentSelectLesson == null) {
+                return true;
+            }
+            StudentWork sw = studentWorkDao.findStudentWorkBySnoAndWno(studentSelectLesson.getSno(), homeWork.getWno());
+            if (sw != null) {
                 return true;
             }
             StudentWork studentWork = new StudentWork(studentSelectLesson.getSno(), studentSelectLesson.getLno(), 0, 0);

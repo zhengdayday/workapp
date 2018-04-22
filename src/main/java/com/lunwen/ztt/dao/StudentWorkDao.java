@@ -14,4 +14,10 @@ import java.util.List;
 public interface StudentWorkDao extends JpaRepository<StudentWork, Long>{
 
     List<StudentWork> findAllByWno(Long wno);
+
+    List<StudentWork> findAllBySno(String sno);
+
+
+    StudentWork findStudentWorkBySnoAndWno(String sno, Long wno);
+
 }

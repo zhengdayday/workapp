@@ -27,13 +27,13 @@ public class HomeWorkController {
     private HomeWorkService homeWorkService;
 
     /**
-     * 得到教师在所有work
-     * @param tno 工号
+     * 得到课程在所有work
+     * @param lno 工号
      * @return map
      */
     @RequestMapping(value = "/getAllWork", method = RequestMethod.GET)
-    public Map<String, Object> getAllWork(String tno) {
-        List<HomeWork> list = homeWorkService.getAllHomeWork(tno);
+    public Map<String, Object> getAllWork(Long lno) {
+        List<HomeWork> list = homeWorkService.getAllHomeWork(lno);
         Map<String, Object> map = new HashMap<>();
         map.put("workList", list);
         return map;
