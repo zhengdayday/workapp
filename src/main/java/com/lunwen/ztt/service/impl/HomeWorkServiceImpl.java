@@ -42,7 +42,7 @@ public class HomeWorkServiceImpl implements HomeWorkService{
     public boolean saveHomeWork(HomeWork homeWork) {
         HomeWork findWork = homeWorkDao.findHomeWorkByTnoAndWorkName(homeWork.getTno(), homeWork.getWorkName());
         if(findWork == null) {
-            homeWorkDao.save(homeWork);
+            HomeWork homeWork1 = homeWorkDao.save(homeWork);
             StudentSelectLesson studentSelectLesson = studentSelectLessonDao.findStudentSelectLessonByLno(homeWork.getLno());
             if(studentSelectLesson == null) {
                 return true;
@@ -51,7 +51,7 @@ public class HomeWorkServiceImpl implements HomeWorkService{
             if (sw != null) {
                 return true;
             }
-            StudentWork studentWork = new StudentWork(studentSelectLesson.getSno(), studentSelectLesson.getLno(), 0, 0);
+            StudentWork studentWork = new StudentWork(studentSelectLesson.getSno(), homeWork1.getWno(), 0, 0);
             studentWorkDao.save(studentWork);
             return true;
         }
