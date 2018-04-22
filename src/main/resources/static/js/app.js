@@ -101,6 +101,49 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                 };
             }
         })
+        .state('doWork', {
+            url: '/doWork?wno',
+            templateUrl: '../partials/doWork.html',
+            controller:function ($cookieStore,$scope,$state,Restangular, $stateParams) {
+                $scope.wno = $stateParams.wno;
+                $scope.doWorkInfo = {};
+                $scope.doWork = function () {
+                    Restangular.one("homework/getWorkInfo").get({wno:$scope.wno}).then(function (response) {
+                        $scope.workinfo = response;
+                    });
+                }
+                $scope.answerSave = function () {
+                    $scope.doWorkInfo.wno = $scope.wno;
+                    $scope.doWorkInfo.sno = localStorage.getItem("number");
+                    Restangular.one("studentWork/saveAnswer").customPOST($scope.doWorkInfo).then(function (value) {
+                        swal("完成作业");
+                    });
+                }
+                $scope.doWork();
+            }
+        })
+        .state('readWork', {
+            url: '/readWork?wno&sno',
+            templateUrl: '../partials/readWork.html',
+            controller:function ($cookieStore,$scope,$state,Restangular, $stateParams) {
+                $scope.wno = $stateParams.wno;
+                $scope.sno = $stateParams.sno;
+                $scope.readWorkInfo = {};
+                $scope.readWork = function () {
+                    Restangular.one("studentWork/problem").get({wno:$scope.wno, sno:$scope.sno}).then(function (response) {
+                        $scope.student = response;
+                    });
+                }
+                $scope.readAnswerSave = function () {
+                    $scope.readWorkInfo.wno = $scope.wno;
+                    $scope.readWorkInfo.sno = $scope.sno;
+                    Restangular.one("studentWork/saveGrade").customPOST($scope.readWorkInfo).then(function (value) {
+                        swal("批改成功");
+                    });
+                }
+                $scope.readWork();
+            }
+        })
         .state('userInfo', {
             url: '/userInfo',
             templateUrl: '../partials/userInfo.html',
@@ -528,8 +571,8 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                     });
                     Restangular.one("studentWork/getWork").get({wno:$scope.wno}).then(function (response) {
                         // 取得作业信息
-                        $scope.workRead = response.studentWorkRead;
-                        $scope.workNotRead = response.studentWorkNotRead;
+                        $scope.workRead = response.studentRead;
+                        $scope.workNotRead = response.studentNotRead;
 
                         $scope.readpageSize = 5;
                         // 分页数

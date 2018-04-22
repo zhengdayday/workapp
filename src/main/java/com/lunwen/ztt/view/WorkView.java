@@ -14,23 +14,59 @@ public class WorkView {
 
     private String studentName;
 
-    private String gradle;
+    private String grade;
+
+    private String lessonName;
+
+    private String sno;
+
+    private Long wno;
+
+    public Long getWno() {
+        return wno;
+    }
+
+    public void setWno(Long wno) {
+        this.wno = wno;
+    }
+
+    public String getSno() {
+        return sno;
+    }
+
+    public void setSno(String sno) {
+        this.sno = sno;
+    }
+
+    public String getLessonName() {
+        return lessonName;
+    }
+
+    public void setLessonName(String lessonName) {
+        this.lessonName = lessonName;
+    }
 
     public WorkView() {
 
     }
 
-    public WorkView(String workName, String workDesc, String studentName) {
+    public WorkView(String workName, String workDesc, String studentName, String lessonName, String sno, Long wno) {
         this.workName = workName;
         this.workDesc = workDesc;
         this.studentName = studentName;
+        this.lessonName = lessonName;
+        this.sno = sno;
+        this.wno = wno;
     }
 
-    public WorkView(String workName, String workDesc, String studentName, String gradle) {
+    public WorkView(String workName, String workDesc, String studentName, String grade, String lessonName, String sno, Long wno) {
         this.workName = workName;
         this.workDesc = workDesc;
         this.studentName = studentName;
-        this.gradle = gradle;
+        this.grade = grade;
+        this.lessonName = lessonName;
+        this.sno = sno;
+        this.wno = wno;
     }
 
     public String getWorkName() {
@@ -57,11 +93,11 @@ public class WorkView {
         this.studentName = studentName;
     }
 
-    public String getGradle() {
-        return gradle;
+    public String getGrade() {
+        return grade;
     }
 
-    public void setGradle(String gradle) {
-        this.gradle = gradle;
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 }

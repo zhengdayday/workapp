@@ -1,0 +1,29 @@
+<!-- 做作业 -->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="tabbable" id="tabs-390357">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="javascript:; #panel-16186" data-toggle="tab">当前作业信息</a>
+                    </li>
+                    <li>
+                        <a href="javascript:; #panel-735528" data-toggle="tab">做作业</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <!-- 作业描述 -->
+                    <div class="tab-pane active" id="panel-16186">
+                        <div ng-bind-html="workinfo.workInfo | parseHTML"></div>
+                    </div>
+
+                    <!--写作业 -->
+                    <div class="tab-pane" id="panel-735528">
+                        <div text-angular ng-model="doWorkInfo.answer"></div>
+                        <div style="margin-top: 70px" class="btn btn-primary" ng-click="doWorkInfo.answer == null || answerSave()" ng-disabled="doWorkInfo.answer == null">提交作业</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

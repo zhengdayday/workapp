@@ -1,6 +1,7 @@
 package com.lunwen.ztt.service;
 
 import com.lunwen.ztt.model.StudentWork;
+import com.lunwen.ztt.view.ReadProblem;
 
 import java.util.List;
 import java.util.Map;
@@ -34,4 +35,25 @@ public interface StudentWorkService {
      */
     public boolean deleteWork(StudentWork studentWork);
 
+    /**
+     *  save anser
+     * @param studentWork workInfo
+     * @return boolean
+     */
+    public boolean saveAnswer(StudentWork studentWork);
+
+
+    /**
+     *  save grade
+     * @param studentWork workInfo
+     * @return boolean
+     */
+    public boolean saveGrade(StudentWork studentWork);
+
+    /**
+     * view read problem
+     * @param studentWork sw
+     * @return ReadProblem
+     */
+    public ReadProblem getProblem(StudentWork studentWork);
 }

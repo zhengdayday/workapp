@@ -1,3 +1,4 @@
+<!-- 教师作业列表-->
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">
@@ -24,15 +25,19 @@
                     <div class="tab-pane" id="panel-735528">
                         <table class="table table-bordered">
                             <tr>
+                                <th>课程名</th>
                                 <th>作业名字</th>
                                 <th>作业描述</th>
+                                <th>学生名</th>
                                 <th>评价</th>
                             </tr>
                             <tr ng-repeat="x in readitems">
                                 <!-- <td>{{ $index + 1 }}</td> -->
+                                <td ng-bind="x.lessonName"></td>
                                 <td ng-bind="x.workName"></td>
                                 <td ng-bind="x.workDesc"></td>
-                                <td ng-bind="x.gradle"></td>
+                                <td ng-bind="x.studentName"></td>
+                                <td ng-bind="x.grade"></td>
                             </tr>
                         </table>
                         <nav>
@@ -58,15 +63,19 @@
                     <div class="tab-pane" id="panel-18342">
                         <table class="table table-bordered">
                             <tr>
+                                <th>课程名</th>
                                 <th>作业名字</th>
                                 <th>作业描述</th>
+                                <th>学生名</th>
                                 <th>操作</th>
                             </tr>
                             <tr ng-repeat="x in readNotitems">
                                 <!-- <td>{{ $index + 1 }}</td> -->
+                                <td ng-bind="x.lessonName"></td>
                                 <td ng-bind="x.workName"></td>
                                 <td ng-bind="x.workDesc"></td>
-                                <td><a>提交作业</a></td>
+                                <td ng-bind="x.studentName"></td>
+                                <td><a ui-sref="readWork({wno:{{x.wno}},sno:'{{x.sno}}'})">批改作业</a></td>
                             </tr>
                         </table>
                         <nav>

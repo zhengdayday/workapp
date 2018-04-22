@@ -98,10 +98,10 @@ public class StudentSelectLessonServiceImpl implements StudentSelectLessonServic
                 continue;
             }
             if(studentWork.getGrade() != null) {
-                StudentWorkView studentWorkView = new StudentWorkView(homeWork.getWorkName(), homeWork.getDesc(), "已完成", studentWork.getGrade(), lesson.getLessonName());
+                StudentWorkView studentWorkView = new StudentWorkView(homeWork.getWorkName(), homeWork.getDesc(), "已完成", studentWork.getGrade(), lesson.getLessonName(), homeWork.getWno());
                 viewListok.add(studentWorkView);
             } else {
-                StudentWorkView studentWorkView = new StudentWorkView(homeWork.getWorkName(), homeWork.getDesc(), "未完成", lesson.getLessonName());
+                StudentWorkView studentWorkView = new StudentWorkView(homeWork.getWorkName(), homeWork.getDesc(), "未完成", lesson.getLessonName(), homeWork.getWno());
                 viewListno.add(studentWorkView);
             }
         }

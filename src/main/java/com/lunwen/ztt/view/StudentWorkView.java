@@ -16,24 +16,35 @@ public class StudentWorkView {
 
     private String workStatus;
 
-    private String gradle;
+    private String grade;
 
     private String lessonName;
 
+    private Long wno;
 
-    public StudentWorkView(String workName, String workDesc, String workStatus, String lessonName) {
-        this.workName = workName;
-        this.workDesc = workDesc;
-        this.workStatus = workStatus;
-        this.lessonName = lessonName;
+    public Long getWno() {
+        return wno;
     }
 
-    public StudentWorkView(String workName, String workDesc, String workStatus, String gradle, String lessonName) {
+    public void setWno(Long wno) {
+        this.wno = wno;
+    }
+
+    public StudentWorkView(String workName, String workDesc, String workStatus, String lessonName, Long wno) {
         this.workName = workName;
         this.workDesc = workDesc;
         this.workStatus = workStatus;
-        this.gradle = gradle;
         this.lessonName = lessonName;
+        this.wno = wno;
+    }
+
+    public StudentWorkView(String workName, String workDesc, String workStatus, String grade, String lessonName, Long wno) {
+        this.workName = workName;
+        this.workDesc = workDesc;
+        this.workStatus = workStatus;
+        this.grade = grade;
+        this.lessonName = lessonName;
+        this.wno = wno;
     }
 
     public StudentWorkView() {
@@ -63,12 +74,12 @@ public class StudentWorkView {
         this.workStatus = workStatus;
     }
 
-    public String getGradle() {
-        return gradle;
+    public String getGrade() {
+        return grade;
     }
 
-    public void setGradle(String gradle) {
-        this.gradle = gradle;
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 
     public String getLessonName() {
