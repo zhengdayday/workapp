@@ -19,7 +19,7 @@ spring:
    jpa:
      hibernate.ddl-auto: update
      show-sql: true
-     database-platform: com.lunwen.ztt.config.MySQL5DialectUTF8
+     database-platform: com.lunwen.wangjie.config.MySQL5DialectUTF8
 
    thymeleaf:
      cache: false

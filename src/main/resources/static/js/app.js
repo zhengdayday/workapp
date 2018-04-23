@@ -1,6 +1,6 @@
-var zttApp = angular.module('zttApp', ["ui.router","restangular","ngCookies", "textAngular"]);
+var wangJie = angular.module('wangJie', ["ui.router","restangular","ngCookies", "textAngular"]);
 
-zttApp.controller('zttAppController', function ($scope) {
+wangJie.controller('wangJieController', function ($scope) {
    $scope.isLogin = false;
    $scope.isTeacher = false;
    $scope.loginName = "";
@@ -15,7 +15,7 @@ zttApp.controller('zttAppController', function ($scope) {
    }
 });
 
-zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+wangJie.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     //开始路由
     $urlRouterProvider.otherwise('/home');
     //去除#！url
@@ -41,7 +41,6 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: function ($cookieStore,$rootScope,$scope,$state,Restangular) {
                 $scope.user = null;
                 $scope.logSucc = false;
-                $("#login").removeAttr("ui-sref");
                 $scope.login = function () {
                     Restangular.one("users/login").customPOST($scope.user).then(function (value) {
                         if(value.token != null && value.token.trim() != "") {
@@ -802,7 +801,7 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
 });
 //test table
-zttApp.controller('scotchController', function($scope) {
+wangJie.controller('scotchController', function($scope) {
 
     $scope.message = 'test';
 
@@ -823,7 +822,7 @@ zttApp.controller('scotchController', function($scope) {
 
 });
 
-zttApp.filter("parseHTML", function ($sce) {
+wangJie.filter("parseHTML", function ($sce) {
     return function (text) {
         return $sce.trustAsHtml(text);
     }
