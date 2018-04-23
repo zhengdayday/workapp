@@ -105,6 +105,9 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url: '/doWork?wno',
             templateUrl: '../partials/doWork.html',
             controller:function ($cookieStore,$scope,$state,Restangular, $stateParams) {
+                if(localStorage.getItem("token") == null ) {
+                    $state.go('home.login');
+                }
                 $scope.wno = $stateParams.wno;
                 $scope.doWorkInfo = {};
                 $scope.doWork = function () {
@@ -126,6 +129,9 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url: '/readWork?wno&sno',
             templateUrl: '../partials/readWork.html',
             controller:function ($cookieStore,$scope,$state,Restangular, $stateParams) {
+                if(localStorage.getItem("token") == null ) {
+                    $state.go('home.login');
+                }
                 $scope.wno = $stateParams.wno;
                 $scope.sno = $stateParams.sno;
                 $scope.readWorkInfo = {};
@@ -148,6 +154,9 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url: '/userInfo',
             templateUrl: '../partials/userInfo.html',
             controller: function ($cookieStore, $scope,$state,Restangular) {
+                if(localStorage.getItem("token") == null ) {
+                    $state.go('home.login');
+                }
                $scope.logout = function () {
                    localStorage.removeItem("token");
                    localStorage.removeItem("name");
@@ -156,8 +165,9 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                    $scope.isLogin = false;
                    $scope.isTeacher = false;
                    $scope.loginName = "";
-                   swal("已经注销，跳转到登录页面");
-                   location.reload();
+                   for(var i = 0; i < 1;i ++) {
+                       location.reload();
+                   }
                    $state.go('home.login');
 
                }
@@ -174,13 +184,15 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url: '/info2',
             templateUrl: '../partials/info2.html',
             controller: function ($cookieStore, $scope,$state,Restangular) {
-                localStorage.removeItem()
             }
         })
         .state('lessonInfo', {
             url: '/lessonInfo',
             templateUrl: '../partials/lessonInfo.html',
             controller: function ($cookieStore, $scope,$state,Restangular) {
+                if(localStorage.getItem("token") == null ) {
+                    $state.go('home.login');
+                }
                 $scope.getAllLesson = function () {
                     Restangular.one("lesson/teacherLesson").get({tno: localStorage.getItem("number")}).then(function (response) {
                         // 取得所有的课程
@@ -318,6 +330,9 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url:'/teacherwork?lno&lname',
             templateUrl: '../partials/teacher-work.html',
             controller: function ($cookieStore, $scope,$state,Restangular,$stateParams) {
+                if(localStorage.getItem("token") == null ) {
+                    $state.go('home.login');
+                }
                 $scope.lname = $stateParams.lname;
                 $scope.lno = $stateParams.lno;
                 $scope.getAllWork = function () {
@@ -402,6 +417,9 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url:'/sw?lno',
             templateUrl: '../partials/student-work.html',
             controller: function ($cookieStore, $scope,$state,Restangular,$stateParams) {
+                if(localStorage.getItem("token") == null ) {
+                    $state.go('home.login');
+                }
                 $scope.lno = $stateParams.lno;
                 $scope.lessonInfo=[];
                 $scope.lessonOk=[];
@@ -521,6 +539,9 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url:'/work?wno',
             templateUrl: '../partials/work.html',
             controller: function ($cookieStore, $scope,$state,Restangular,$stateParams) {
+                if(localStorage.getItem("token") == null ) {
+                    $state.go('home.login');
+                }
                 $scope.wno = $stateParams.wno;
                 $scope.workInfo=[];
                 $scope.workRead=[];
@@ -639,6 +660,9 @@ zttApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url:'/studentLesson',
             templateUrl: '../partials/userLesson.html',
             controller: function ($cookieStore, $scope,$state,Restangular) {
+                if(localStorage.getItem("token") == null ) {
+                    $state.go('home.login');
+                }
                 $scope.lessonInfo=[];
                 $scope.lessonSave=[];
                 $scope.lessons = function () {
