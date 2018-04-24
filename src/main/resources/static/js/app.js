@@ -398,14 +398,14 @@ wangJie.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                     $scope.work.lno = $scope.lno;
                     Restangular.one("homework/save").customPOST($scope.work).then(function (value) {
                         if(value == true) {
-                            swal("保存课程成功");
+                            swal("保存作业成功");
                         } else {
-                            swal("保存课程失败已经重名");
+                            swal("保存作业失败已经重名");
                         }
                         $scope.work = {};
                         $scope.getAllWork();
                     }, function (err) {
-                        swal("保存课程失败");
+                        swal("保存作业失败");
                         console.warn(err);
                     });
                 }

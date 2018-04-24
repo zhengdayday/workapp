@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveWork()">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="work.workInfo == null || work.workName == null || work.desc == null ||saveWork()" ng-disabled="work.workInfo == null || work.workName == null || work.desc == null">
                                 保存
                             </button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
