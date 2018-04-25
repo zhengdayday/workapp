@@ -41,16 +41,18 @@ public class HomeWorkServiceImpl implements HomeWorkService{
         HomeWork findWork = homeWorkDao.findHomeWorkByTnoAndWorkName(homeWork.getTno(), homeWork.getWorkName());
         if(findWork == null) {
             HomeWork homeWork1 = homeWorkDao.save(homeWork);
-            StudentSelectLesson studentSelectLesson = studentSelectLessonDao.findStudentSelectLessonByLno(homeWork.getLno());
-            if(studentSelectLesson == null) {
-                return true;
+            List<StudentSelectLesson> studentSelectLessonList = studentSelectLessonDao.findAllByLno(homeWork.getLno());
+            for (StudentSelectLesson studentSelectLesson : studentSelectLessonList) {
+                if(studentSelectLesson == null) {
+                    continue;
+                }
+                StudentWork sw = studentWorkDao.findStudentWorkBySnoAndWno(studentSelectLesson.getSno(), homeWork.getWno());
+                if (sw != null) {
+                    continue;
+                }
+                StudentWork studentWork = new StudentWork(studentSelectLesson.getSno(), homeWork1.getWno(), 0, 0);
+                studentWorkDao.save(studentWork);
             }
-            StudentWork sw = studentWorkDao.findStudentWorkBySnoAndWno(studentSelectLesson.getSno(), homeWork.getWno());
-            if (sw != null) {
-                return true;
-            }
-            StudentWork studentWork = new StudentWork(studentSelectLesson.getSno(), homeWork1.getWno(), 0, 0);
-            studentWorkDao.save(studentWork);
             return true;
         }
         return false;

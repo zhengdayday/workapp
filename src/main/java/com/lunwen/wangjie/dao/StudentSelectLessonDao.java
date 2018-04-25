@@ -30,8 +30,8 @@ public interface StudentSelectLessonDao extends JpaRepository<StudentSelectLesso
     /**
      * 查找课程
      * @param lno lno
-     * @return ssl
+     * @return list
      */
-   StudentSelectLesson findStudentSelectLessonByLno(Long lno);
+   List<StudentSelectLesson> findAllByLno(Long lno);
 
 }

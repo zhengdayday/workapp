@@ -6,16 +6,16 @@ helloWorld: spring Boot\u5927\u7237\u4F60\u597D
 
 msyql:
    jdbcName: com.mysql.jdbc.Driver
-   dbUrl: jdbc:mysql://localhost:3306/zdd
+   dbUrl: jdbc:mysql://localhost:3306/wj
    userName: root
-   password:
+   password: 123
 
 spring:
    datasource:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/wj33?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      url: jdbc:mysql://localhost:3306/wj?useUnicode=true&characterEncoding=utf-8&useSSL=false
       username: root
-      password:
+      password: 123
    jpa:
      hibernate.ddl-auto: update
      show-sql: true
