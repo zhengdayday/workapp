@@ -28,24 +28,24 @@
                                         <label for="InputName">
                                             请输入姓名
                                         </label>
-                                        <input type="text" class="form-control" id="InputName" ng-maxlength="20" ng-model="user.name" required/>
+                                        <input type="text" class="form-control" id="InputName" ng-maxlength="100" ng-model="user.name" required/>
                                     </div>
                                     <div class="form-group">
                                         <label for="InputNumber">
                                             请输入学号
                                         </label>
-                                        <input type="text" class="form-control" id="InputNumber" ng-model="user.number"  ng-maxlength="20" required/>
+                                        <input type="text" class="form-control" id="InputNumber" ng-model="user.number"  ng-maxlength="100" required/>
                                     </div>
                                     <div class="form-group">
                                         <label for="InputPassword">
                                             请输入密码
                                         </label>
-                                        <input type="password" class="form-control" id="InputPassword" ng-model="user.password"  ng-maxlength="20" required/>
+                                        <input type="password" class="form-control" id="InputPassword" ng-model="user.password"  ng-maxlength="100" required/>
                                     </div>
                                     <div ng-if="regSucc" class="btn btn-warning" >邮箱/工号/学号已经被注册</div>
                                     <br ng-if="regSucc">
                                     <br ng-if="regSucc">
-                                    <div type="submit" class="btn btn-default " ng-click="user.name == null || user.password == null || user.email == null || register()" ng-disabled="user.name == null || user.password == null || user.email == null" >
+                                    <div type="submit" class="btn btn-default " ng-click="user.name == null || user.password == null || user.email == null || user.number == null || register()" ng-disabled="user.name == null || user.password == null || user.email == null || user.number == null" >
                                         注册
                                     </div>
                                 </form>
@@ -70,24 +70,24 @@
                                         <label for="InputName1">
                                             请输入姓名
                                         </label>
-                                        <input type="text" class="form-control" id="InputName1" ng-maxlength="20" ng-model="teacher.name" required/>
+                                        <input type="text" class="form-control" id="InputName1" ng-maxlength="100" ng-model="teacher.name" required/>
                                     </div>
                                     <div class="form-group">
                                         <label for="InputNumber1">
                                             请输入工号
                                         </label>
-                                        <input type="text" class="form-control" id="InputNumber1" ng-model="teacher.number"  ng-maxlength="20" required/>
+                                        <input type="text" class="form-control" id="InputNumber1" ng-model="teacher.number"  ng-maxlength="100" required/>
                                     </div>
                                     <div class="form-group">
                                         <label for="InputPassword1">
                                             请输入密码
                                         </label>
-                                        <input type="password" class="form-control" id="InputPassword1" ng-model="teacher.password"  ng-maxlength="20" required/>
+                                        <input type="password" class="form-control" id="InputPassword1" ng-model="teacher.password"  ng-maxlength="100" required/>
                                     </div>
                                     <div ng-if="regSucc1" class="btn btn-warning" >邮箱/工号/学号已经被注册</div>
                                     <br ng-if="regSucc1">
                                     <br ng-if="regSucc1">
-                                    <button type="submit" class="btn btn-default " ng-click="teacher.name == null || teacher.password == null || teacher.email == null || registerTeacher()" ng-disabled="teacher.name == null || teacher.password == null || teacher.email == null" >
+                                    <button type="submit" class="btn btn-default " ng-click="teacher.name == null || teacher.password == null || teacher.email == null || teacher.number  || registerTeacher()" ng-disabled="teacher.name == null || teacher.password == null || teacher.email == null || teacher.number" >
                                         注册
                                     </button>
                                 </form>
